@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from '../card/card';
 
 function Main() {
   return (
@@ -111,6 +112,11 @@ function Main() {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
               </div>
             </section>
             <div className='cities__right-section'>

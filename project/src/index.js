@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './components/main/main';
-import Card from './components/card/card';
+import App from './components/app/app';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Main />
-    <Card />
+    <App />
   </React.StrictMode>,
   document.getElementById('root'));
