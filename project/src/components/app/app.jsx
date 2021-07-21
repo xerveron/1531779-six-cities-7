@@ -7,9 +7,10 @@ import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import Property from '../property/property';
 import NotFoundScreen from '../notfoundscreen/notfoundscreen';
+import offerProp from '../card/offer.prop';
 
 function App(props) {
-  const {numberOffers} = props;
+  const {numberOffers, offers} = props;
   return (
     <BrowserRouter>
       <Switch>
