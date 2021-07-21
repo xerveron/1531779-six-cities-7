@@ -65,7 +65,7 @@ const offers = [
     'price': 120,
     'rating': 4.8,
     'title': 'Beautiful & luxurious studio at great location',
-    'type': 'apartment',
+    'type': 'hotel',
   },
   {
     'bedrooms': 3,
@@ -99,7 +99,7 @@ const offers = [
     'price': 120,
     'rating': 4.8,
     'title': 'Beautiful & luxurious studio at great location',
-    'type': 'apartment',
+    'type': 'hostel',
   },
   {
     'bedrooms': 4,
