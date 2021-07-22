@@ -1,9 +1,10 @@
 import React from 'react';
-import Card from '../card/card';
+import OfferList from '../offerlist/offerlist';
 import PropTypes from 'prop-types';
+import offerProp from '../card/offer.prop';
 
 function Main(props) {
-  const { numberOffers } = props;
+  const { numberOffers, offers } = props;
   return (
     <div className='page page--gray page--main'>
       <header className='header'>
@@ -115,7 +116,9 @@ function Main(props) {
                   </li>
                 </ul>
               </form>
-
+              <OfferList
+                offers={offers}
+              />
             </section>
             <div className='cities__right-section'>
               <section className='cities__map map'></section>
@@ -129,6 +132,7 @@ function Main(props) {
 
 Main.propTypes = {
   numberOffers: PropTypes.number.isRequired,
+  offers:PropTypes.arrayOf(offerProp).isRequired,
 };
 
 export default Main;

@@ -5,9 +5,9 @@ export const AppRoute = {
   ROOT: '/',
 };
 
-export const ApartType = {
-  HOSTEL:'hostel',
-  APARTMENT: 'apartment',
-  HOTEL: 'hotel',
-  MOTEL: 'motel',
-};
+export const ApartType = [
+  'hostel',
+  'apartment',
+  'hotel',
+  'motel',
+];

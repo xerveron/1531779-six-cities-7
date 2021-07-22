@@ -17,6 +17,7 @@ function App(props) {
         <Route exact path={AppRoute.ROOT}>
           <Main
             numberOffers={numberOffers}
+            offers={offers}
           />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
@@ -38,6 +39,7 @@ function App(props) {
 
 App.propTypes = {
   numberOffers: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
 export default App;

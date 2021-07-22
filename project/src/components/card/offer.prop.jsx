@@ -14,9 +14,9 @@ export default PropTypes.shape({
   description:PropTypes.string.isRequired,
   goods:PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   host:PropTypes.shape({
-    avatar:PropTypes.string.isRequired,
+    avatarUrl:PropTypes.string.isRequired,
     id:PropTypes.number.isRequired,
-    isPro:PropTypes.number.isRequired,
+    isPro:PropTypes.bool.isRequired,
     name:PropTypes.string.isRequired,
   }).isRequired,
   id:PropTypes.number.isRequired,
@@ -33,6 +33,5 @@ export default PropTypes.shape({
   price:PropTypes.number.isRequired,
   rating:PropTypes.number.isRequired,
   title:PropTypes.string.isRequired,
-  type:PropTypes.oneOf([ApartType]).isRequired,
-  genre: PropTypes.string.isRequired,
+  type:PropTypes.oneOf(ApartType).isRequired,
 }).isRequired;
