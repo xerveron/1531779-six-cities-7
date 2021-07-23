@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import offerProp from '../card/offer.prop';
 
 
 function Card(props) {
   const {previewImage, price, title} = props.offer;
+  const [hover, setHover] = React.useState(false);
   return (
-    <article className='cities__place-card place-card'>
+    <article className='cities__place-card place-card'
+    onMouseEnter={() => setHover(props.offer)}
+    onMouseLeave={() => setHover(false)}
+    >
+
+{console.log(hover)}
       <div className='cities__image-wrapper place-card__image-wrapper'>
-        {console.log(previewImage)}
         <a href='#'>
           <img
             className='place-card__image'
