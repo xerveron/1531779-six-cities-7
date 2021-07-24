@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AppRoute} from '../../const';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
@@ -10,7 +10,7 @@ import NotFoundScreen from '../notfoundscreen/notfoundscreen';
 import offerProp from '../card/offer.prop';
 
 function App(props) {
-  const {numberOffers, offers} = props;
+  const { numberOffers, offers } = props;
   return (
     <BrowserRouter>
       <Switch>
@@ -24,10 +24,14 @@ function App(props) {
           <Login />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites />
+          <Favorites
+            offers={offers}
+          />
         </Route>
         <Route path={AppRoute.PROPERTY}>
-          <Property />
+          <Property
+            offers={offers}
+          />
         </Route>
         <Route>
           <NotFoundScreen />

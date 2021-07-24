@@ -1,19 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import offerProp from '../card/offer.prop';
 
 
 function Card(props) {
-  const {previewImage, price, title} = props.offer;
+  const { id, previewImage, price, title } = props.offer;
   const [hover, setHover] = React.useState(false);
   return (
     <article className='cities__place-card place-card'
-    onMouseEnter={() => setHover(props.offer)}
-    onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => setHover(props.offer)}
+      onMouseLeave={() => setHover(false)}
     >
-
-{console.log(hover)}
       <div className='cities__image-wrapper place-card__image-wrapper'>
-        <a href='#'>
+        <Link to={`/offer/${id}`}>
           <img
             className='place-card__image'
             src={`img/${previewImage}`}
@@ -21,7 +20,7 @@ function Card(props) {
             height='200'
             alt='Place image'
           />
-        </a>
+        </Link>
       </div>
       <div className='place-card__info'>
         <div className='place-card__price-wrapper'>

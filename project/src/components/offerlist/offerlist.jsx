@@ -6,20 +6,10 @@ import offerProp from '../card/offer.prop';
 
 function OfferList(props) {
   const { offers } = props;
+  const items = offers.map((offer, i) => <Card offer={offer} key={offer.id} />);
   return (
     <div className='cities__places-list places__list tabs__content'>
-      <Card
-        offer={offers[0]}
-      />
-      <Card
-        offer={offers[1]}
-      />
-      <Card
-        offer={offers[2]}
-      />
-      <Card
-        offer={offers[3]}
-      />
+      {items}
     </div>
   );
 }

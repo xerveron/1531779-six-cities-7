@@ -11,3 +11,12 @@ export const ApartType = [
   'hotel',
   'motel',
 ];
+
+export const Cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+]

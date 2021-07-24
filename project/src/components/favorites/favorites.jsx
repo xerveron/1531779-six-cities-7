@@ -1,7 +1,20 @@
 import React from 'react';
-import Card from '../card/card';
+import PropTypes from 'prop-types';
+import offerProp from '../card/offer.prop';
+import FavoriteList from '../favoriteList/favoriteList';
+import { Cities } from '../../const';
 
-function Favorites() {
+const offerFilter = (offers, city) => offers.filter((offer) => offer.city.name === city);
+
+function Favorites(props) {
+  const { offers } = props;
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+
+  const favoriteCities = Cities.filter((city) => {
+    for (let i=0;i<favoriteOffers.length;i++) {
+      if (city===favoriteOffers[i].city.name) {return true;}
+    }
+  });
   return (
     <div className='page'>
       <header className='header'>
@@ -46,32 +59,8 @@ function Favorites() {
           <section className='favorites'>
             <h1 className='favorites__title'>Saved listing</h1>
             <ul className='favorites__list'>
-              <li className='favorites__locations-items'>
-                <div className='favorites__locations locations locations--current'>
-                  <div className='locations__item'>
-                    <a className='locations__item-link' href='#'>
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className='favorites__places'>
-                  <Card />
-                  <Card />
-                </div>
-              </li>
-
-              <li className='favorites__locations-items'>
-                <div className='favorites__locations locations locations--current'>
-                  <div className='locations__item'>
-                    <a className='locations__item-link' href='#'>
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <div className='favorites__places'>
-                  <Card />
-                </div>
-              </li>
+              {favoriteCities.map((city, i) => <FavoriteList place={city} offers={offerFilter(favoriteOffers, city)} key={city} />
+              )}
             </ul>
           </section>
         </div>
@@ -80,6 +69,8 @@ function Favorites() {
   );
 }
 
-Favorites.propTypes = {};
+Favorites.propTypes = {
+  offers: PropTypes.arrayOf(offerProp).isRequired,
+};
 
 export default Favorites;
