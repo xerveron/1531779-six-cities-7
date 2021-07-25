@@ -3,8 +3,8 @@ const offers = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 52.366667,
+        longitude: 4.9,
         zoom: 10,
       },
       name: 'Amsterdam',
@@ -22,8 +22,8 @@ const offers = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 4,
@@ -37,8 +37,8 @@ const offers = [
     bedrooms: 2,
     city: {
       location: {
-        latitude: 52.3892,
-        longitude: 4.895,
+        latitude: 52.366667,
+        longitude: 4.9,
         zoom: 10,
       },
       name: 'Amsterdam',
@@ -56,8 +56,8 @@ const offers = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.3892,
-      longitude: 4.895,
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 4,
@@ -71,7 +71,7 @@ const offers = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.4,
+        latitude: 52.366667,
         longitude: 4.9,
         zoom: 10,
       },
@@ -90,8 +90,8 @@ const offers = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.4,
-      longitude: 4.9,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8,
     },
     maxAdults: 4,
@@ -105,11 +105,11 @@ const offers = [
     bedrooms: 4,
     city: {
       location: {
-        latitude: 52.30,
-        longitude: 4.87,
+        latitude: 52.366667,
+        longitude: 4.9,
         zoom: 10,
       },
-      name: 'Cologne',
+      name: 'Amsterdam',
     },
     description: 'Mock 4, GREAT GREAT GREAT',
     goods: ['Heating', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -124,8 +124,8 @@ const offers = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.30,
-      longitude: 4.87,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8,
     },
     maxAdults: 4,

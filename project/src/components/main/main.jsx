@@ -2,9 +2,15 @@ import React from 'react';
 import OfferList from '../offerlist/offerlist';
 import PropTypes from 'prop-types';
 import offerProp from '../card/offer.prop';
+import Map from '../map/map';
 
 function Main(props) {
   const { numberOffers, offers } = props;
+  const city = {
+    lat:offers[0].city.location.latitude,
+    lng:offers[0].city.location.longitude,
+    zoom:offers[0].city.location.zoom,
+  };
   return (
     <div className='page page--gray page--main'>
       <header className='header'>
@@ -121,7 +127,12 @@ function Main(props) {
               />
             </section>
             <div className='cities__right-section'>
-              <section className='cities__map map'></section>
+              <section className='cities__map map'>
+                <Map
+                  offers={offers}
+                  city={city}
+                />
+              </section>
             </div>
           </div>
         </div>
@@ -132,7 +143,7 @@ function Main(props) {
 
 Main.propTypes = {
   numberOffers: PropTypes.number.isRequired,
-  offers:PropTypes.arrayOf(offerProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
 export default Main;
