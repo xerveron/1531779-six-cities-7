@@ -7,7 +7,9 @@ import CitiesList from '../citiesList/citiesList';
 import { connect } from 'react-redux';
 
 function Main(props) {
-  const { numberOffers, offers} = props;
+  const { offers, city } = props;
+  const cityOffer = offers
+    .filter((offer) => offer.city.name === city.name);
   return (
     <div className='page page--gray page--main'>
       <header className='header'>
@@ -56,7 +58,7 @@ function Main(props) {
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>
-                {numberOffers} places to stay in Amsterdam
+                {cityOffer.length} places to stay in {city.name}
               </b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
@@ -85,7 +87,7 @@ function Main(props) {
                 </ul>
               </form>
               <OfferList
-                offers={offers}
+                cityOffer={cityOffer}
               />
             </section>
             <div className='cities__right-section'>
@@ -103,9 +105,13 @@ function Main(props) {
 }
 
 Main.propTypes = {
-  numberOffers: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerProp).isRequired,
-
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 

@@ -10,13 +10,12 @@ import NotFoundScreen from '../notfoundscreen/notfoundscreen';
 import offerProp from '../card/offer.prop';
 
 function App(props) {
-  const { numberOffers, offers } = props;
+  const { offers } = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
           <Main
-            numberOffers={numberOffers}
             offers={offers}
           />
         </Route>

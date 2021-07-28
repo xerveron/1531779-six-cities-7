@@ -7,7 +7,6 @@ import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import { reducer } from './store/reducer';
-const numberOffers = 312;
 
 const store = createStore(
   reducer,
@@ -17,7 +16,8 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App numberOffers={numberOffers} offers={offers} comments={comments} />
+      <App offers={offers} comments={comments} />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));
+
