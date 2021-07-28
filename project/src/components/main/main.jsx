@@ -1,58 +1,21 @@
 import React from 'react';
-import OfferList from '../offerlist/offerlist';
+import OfferList from '../offerList/offerList';
 import PropTypes from 'prop-types';
 import offerProp from '../card/offer.prop';
 import Map from '../map/map';
 import CitiesList from '../citiesList/citiesList';
 import { connect } from 'react-redux';
+import Header from '../header/header';
 
 function Main(props) {
   const { offers, city } = props;
-  const cityOffer = offers
-    .filter((offer) => offer.city.name === city.name);
+  const cityOffer = offers.filter((offer) => offer.city.name === city.name);
   return (
     <div className='page page--gray page--main'>
-      <header className='header'>
-        <div className='container'>
-          <div className='header__wrapper'>
-            <div className='header__left'>
-              <a className='header__logo-link header__logo-link--active'>
-                <img
-                  className='header__logo'
-                  src='img/logo.svg'
-                  alt='6 cities logo'
-                  width='81'
-                  height='41'
-                />
-              </a>
-            </div>
-            <nav className='header__nav'>
-              <ul className='header__nav-list'>
-                <li className='header__nav-item user'>
-                  <a
-                    className='header__nav-link header__nav-link--profile'
-                    href='#'
-                  >
-                    <div className='header__avatar-wrapper user__avatar-wrapper'></div>
-                    <span className='header__user-name user__name'>
-                      Oliver.conner@gmail.com
-                    </span>
-                  </a>
-                </li>
-                <li className='header__nav-item'>
-                  <a className='header__nav-link' href='#'>
-                    <span className='header__signout'>Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className='page__main page__main--index'>
         <h1 className='visually-hidden'>Cities</h1>
-        <CitiesList/>
+        <CitiesList />
         <div className='cities'>
           <div className='cities__places-container container'>
             <section className='cities__places places'>
@@ -86,15 +49,11 @@ function Main(props) {
                   </li>
                 </ul>
               </form>
-              <OfferList
-                cityOffer={cityOffer}
-              />
+              <OfferList cityOffer={cityOffer} />
             </section>
             <div className='cities__right-section'>
               <section className='cities__map map'>
-                <Map
-                  cityOffer={cityOffer}
-                />
+                <Map cityOffer={cityOffer} />
               </section>
             </div>
           </div>
@@ -114,10 +73,9 @@ Main.propTypes = {
   }).isRequired,
 };
 
-
 const mapStateToProps = (state) => ({
   city: state.city,
 });
 
-export {Main};
-export default connect (mapStateToProps,null) (Main);
+export { Main };
+export default connect(mapStateToProps, null)(Main);
