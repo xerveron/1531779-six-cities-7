@@ -3,8 +3,8 @@ const offers = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 52.366667,
-        longitude: 4.9,
+        latitude: 48.85792,
+        longitude: 2.35126,
         zoom: 10,
       },
       name: 'Paris',
@@ -22,8 +22,8 @@ const offers = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.86792,
+      longitude: 2.36126,
       zoom: 8,
     },
     maxAdults: 4,
@@ -37,8 +37,8 @@ const offers = [
     bedrooms: 2,
     city: {
       location: {
-        latitude: 52.366667,
-        longitude: 4.9,
+        latitude: 48.85792,
+        longitude: 2.35126,
         zoom: 10,
       },
       name: 'Paris',
@@ -56,8 +56,8 @@ const offers = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.369553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.84792,
+      longitude: 2.34126,
       zoom: 8,
     },
     maxAdults: 4,
@@ -71,11 +71,11 @@ const offers = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.366667,
-        longitude: 4.9,
-        zoom: 10,
+        latitude: 50.93638,
+        longitude: 6.96008,
+        zoom: 12,
       },
-      name: 'Amsterdam',
+      name: 'Cologne',
     },
     description: 'Mock 3, FABUOLUS FABUOLUS FABUOLUS',
     goods: ['Heating', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -90,9 +90,9 @@ const offers = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
-      zoom: 8,
+      latitude: 50.94638,
+      longitude: 6.95008,
+      zoom: 12,
     },
     maxAdults: 4,
     previewImage: 'apartment-03.jpg',

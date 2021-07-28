@@ -41,7 +41,6 @@ function App(props) {
 }
 
 App.propTypes = {
-  numberOffers: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 

@@ -23,6 +23,9 @@ function useMap(mapRef, city) {
         .addTo(instance);
       setMap(instance);
     }
+    if (mapRef.current !== null && map !== null) {
+      map.flyTo(new leaflet.LatLng(city.lat, city.lng), city.zoom);
+    }
   }, [mapRef, map, city]);
 
   return map;
