@@ -4,7 +4,7 @@ import App from './components/app/app';
 import offers from './mocks/offers';
 import comments from './mocks/comment';
 import { createStore } from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import { reducer } from './store/reducer';
 const numberOffers = 312;

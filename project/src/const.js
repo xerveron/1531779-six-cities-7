@@ -17,10 +17,40 @@ export const ApartType = [
 ];
 
 export const Cities = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
+  {
+    name: 'Paris',
+    lat: 48.85792,
+    lng: 2.35126,
+    zoom: 10,
+  },
+  {
+    name: 'Cologne',
+    lat: 50.5632,
+    lng: 6.5728,
+    zoom: 10,
+  },
+  {
+    name: 'Brussels',
+    lat: 50.51,
+    lng: 4.21,
+    zoom: 10,
+  },
+  {
+    name: 'Amsterdam',
+    lat: 52.366667,
+    lng: 4.9,
+    zoom: 10,
+  },
+  {
+    name: 'Hamburg',
+    lat: 53.33,
+    lng: 10,
+    zoom: 10,
+  },
+  {
+    name: 'Dusseldorf',
+    lat: 51.1352,
+    lng: 6.4620,
+    zoom: 10,
+  },
 ];

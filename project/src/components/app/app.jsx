@@ -46,4 +46,6 @@ App.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
+
+
 export default App;

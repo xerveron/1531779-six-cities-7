@@ -5,6 +5,7 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const.js';
+import { connect } from 'react-redux';
 
 
 function Map({ offers, city }) {
@@ -36,7 +37,7 @@ function Map({ offers, city }) {
           .addTo(map);
       });
     }
-  }, [map, offers]);
+  }, [map, offers, city]);
 
   return (
     <div
@@ -51,10 +52,16 @@ function Map({ offers, city }) {
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
     lat: PropTypes.number.isRequired,
     lng: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
   }).isRequired,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  city: state.city,
+});
+
+export { Map };
+export default connect(mapStateToProps, null)(Map);

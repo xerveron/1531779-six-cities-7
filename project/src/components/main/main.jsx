@@ -4,14 +4,10 @@ import PropTypes from 'prop-types';
 import offerProp from '../card/offer.prop';
 import Map from '../map/map';
 import CitiesList from '../citiesList/citiesList';
+import { connect } from 'react-redux';
 
 function Main(props) {
-  const { numberOffers, offers } = props;
-  const city = {
-    lat:offers[0].city.location.latitude,
-    lng:offers[0].city.location.longitude,
-    zoom:offers[0].city.location.zoom,
-  };
+  const { numberOffers, offers} = props;
   return (
     <div className='page page--gray page--main'>
       <header className='header'>
@@ -96,7 +92,6 @@ function Main(props) {
               <section className='cities__map map'>
                 <Map
                   offers={offers}
-                  city={city}
                 />
               </section>
             </div>
@@ -110,6 +105,13 @@ function Main(props) {
 Main.propTypes = {
   numberOffers: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerProp).isRequired,
+
 };
 
-export default Main;
+
+const mapStateToProps = (state) => ({
+  city: state.city,
+});
+
+export {Main};
+export default connect (mapStateToProps,null) (Main);

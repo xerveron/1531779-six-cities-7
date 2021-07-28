@@ -3,7 +3,6 @@ import leaflet from 'leaflet';
 
 function useMap(mapRef, city) {
   const [map, setMap] = useState(null);
-
   useEffect(() => {
     if (mapRef.current !== null && map === null) {
       const instance = leaflet.map(mapRef.current, {
@@ -14,7 +13,6 @@ function useMap(mapRef, city) {
         zoomControl: false,
         zoom: 12,
       });
-
       leaflet
         .tileLayer(
           'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
@@ -23,7 +21,6 @@ function useMap(mapRef, city) {
           }
         )
         .addTo(instance);
-
       setMap(instance);
     }
   }, [mapRef, map, city]);

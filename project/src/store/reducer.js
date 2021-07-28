@@ -1,7 +1,8 @@
 import {ActionType} from './action';
+import { Cities } from '../const';
 
 const initialState = {
-  city: 'Paris',
+  city: Cities.find((city)=>city.name==='Paris'),
   offers: [],
 };
 
