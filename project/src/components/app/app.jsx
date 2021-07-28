@@ -6,7 +6,7 @@ import Main from '../main/main';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import Property from '../property/property';
-import NotFoundScreen from '../notfoundscreen/notfoundscreen';
+import NotFoundScreen from '../notFoundScreen/notFoundScreen';
 import offerProp from '../card/offer.prop';
 
 function App(props) {

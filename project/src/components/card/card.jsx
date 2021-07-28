@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
+import { AppRoute } from '../../const';
 import offerProp from '../card/offer.prop';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { ActionCreator } from '../../store/action';
 
 
 function Card(props) {
-  const { id, previewImage, price, title } = props.offer;
+  const { offer, onOfferSelect } = props;
+  const { id, previewImage, price, title } = offer;
   const [hover, setHover] = React.useState(false);
   return (
     <article className='cities__place-card place-card'
@@ -12,7 +17,7 @@ function Card(props) {
       onMouseLeave={() => setHover(false)}
     >
       <div className='cities__image-wrapper place-card__image-wrapper'>
-        <Link to={`/offer/${id}`}>
+        <Link to={`${AppRoute.PROPERTY}`+`${id}`} onClick={() => {onOfferSelect(offer);}}>
           <img
             className='place-card__image'
             src={`img/${previewImage}`}
@@ -53,9 +58,18 @@ function Card(props) {
   );
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  onOfferSelect(offer) {
+    dispatch(ActionCreator.offerChange(offer));
+  },
+});
 
 Card.propTypes = {
   offer: offerProp,
+  onOfferSelect: PropTypes.func.isRequired,
 };
 
-export default Card;
+
+export {Card};
+export default connect(null, mapDispatchToProps) (Card);
+
