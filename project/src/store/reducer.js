@@ -1,10 +1,11 @@
-import { ActionType } from "./action";
-import { Cities } from "../const";
+import { ActionType } from './action';
+import { Cities, AuthorizationStatus } from '../const';
 
 const initialState = {
-  city: Cities.find((city) => city.name === "Paris"),
+  city: Cities.find((city) => city.name === 'Paris'),
   offers: [],
   currentOffer: {},
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +27,16 @@ const reducer = (state = initialState, action) => {
       };
     default:
       return state;
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+      };
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      };
   }
 };
 
