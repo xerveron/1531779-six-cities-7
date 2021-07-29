@@ -13,7 +13,8 @@ export const ApartType = [
   'hostel',
   'apartment',
   'hotel',
-  'motel',
+  'room',
+  'house',
 ];
 
 export const Cities = [
@@ -59,4 +60,11 @@ export const AuthorizationStatus = {
   AUTH: 'AUTH',
   NO_AUTH: 'NO_AUTH',
   UNKNOWN: 'UNKNOWN',
+};
+
+export const APIRoute = {
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+  OFFERS: '/hotels',
+  COMMENTS: '/comments/',
 };

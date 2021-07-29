@@ -7,8 +7,8 @@ import Header from '../header/header';
 import { connect } from 'react-redux';
 
 function Property(props) {
-  const {currentOffer} = props;
-  const {description,title,price,previewImage,goods,rating,type,bedrooms,maxAdults} = currentOffer;
+  const {offers} = props;
+  const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium,host} = offers[46];
   return (
     <div className='page'>
       <Header />
@@ -16,55 +16,19 @@ function Property(props) {
         <section className='property'>
           <div className='property__gallery-container container'>
             <div className='property__gallery'>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src={`img/${previewImage}`}
-                  alt='Photo studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src={`img/${previewImage}`}
-                  alt='Photo studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/apartment-02.jpg'
-                  alt='Photo studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/apartment-03.jpg'
-                  alt='Photo studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/studio-01.jpg'
-                  alt='Photo studio'
-                />
-              </div>
-              <div className='property__image-wrapper'>
-                <img
-                  className='property__image'
-                  src='img/apartment-01.jpg'
-                  alt='Photo studio'
-                />
-              </div>
+              {images.map((image) => (
+                <div className='property__image-wrapper' key={image}>
+                  <img
+                    className='property__image'
+                    src={image}
+                    alt={`${title}`}
+                  />
+                </div>))}
             </div>
           </div>
           <div className='property__container container'>
             <div className='property__wrapper'>
-              <div className='property__mark'>
-                <span>Premium</span>
-              </div>
+              {isPremium ? <div className='property__mark'><span>Premium</span></div> : ''}
               <div className='property__name-wrapper'>
                 <h1 className='property__name'>
                   {title}
@@ -89,7 +53,7 @@ function Property(props) {
                   <span className='visually-hidden'>Rating</span>
                 </div>
                 <span className='property__rating-value rating__value'>
-                 {rating}
+                  {rating}
                 </span>
               </div>
               <ul className='property__features'>
@@ -110,7 +74,7 @@ function Property(props) {
               <div className='property__inside'>
                 <h2 className='property__inside-title'>What&apos;s inside</h2>
                 <ul className='property__inside-list'>
-                {goods.map ((good)=> <li className='property__inside-item' key={good}>{good}</li>)}
+                  {goods.map((good) => <li className='property__inside-item' key={good}>{good}</li>)}
                 </ul>
               </div>
               <div className='property__host'>
@@ -119,14 +83,14 @@ function Property(props) {
                   <div className='property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper'>
                     <img
                       className='property__avatar user__avatar'
-                      src='img/avatar-angelina.jpg'
+                      src={`${host.avatarUrl}`}
                       width='74'
                       height='74'
                       alt='Host avatar'
                     />
                   </div>
-                  <span className='property__user-name'>Angelina</span>
-                  <span className='property__user-status'>Pro</span>
+                  <span className='property__user-name'>{host.name}</span>
+                  <span className='property__user-status'>{host.isPro ? 'Pro' : ''}</span>
                 </div>
                 <div className='property__description'>
                   <p className='property__text'>
@@ -305,11 +269,11 @@ function Property(props) {
 }
 
 Property.propTypes = {
-  currentOffer: PropTypes.arrayOf(offerProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currentOffer: state.currentOffer,
+  offers: state.offers,
 });
 
 export { Property };

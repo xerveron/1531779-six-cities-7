@@ -4,7 +4,6 @@ import { Cities, AuthorizationStatus } from '../const';
 const initialState = {
   city: Cities.find((city) => city.name === 'Paris'),
   offers: [],
-  currentOffer: {},
   authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 
@@ -15,15 +14,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         city: action.payload,
       };
-    case ActionType.OFFER_CHANGE:
-      return {
-        ...state,
-        currentOffer: action.payload,
-      };
     case ActionType.OFFERS_FILL:
       return {
         ...state,
         offers: action.payload,
+        isDataLoaded: true,
       };
     default:
       return state;

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Header from '../header/header';
 
 function Main(props) {
-  const { offers, city } = props;
+  const { city,offers } = props;
   const cityOffer = offers.filter((offer) => offer.city.name === city.name);
   return (
     <div className='page page--gray page--main'>
@@ -75,6 +75,7 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => ({
   city: state.city,
+  offers: state.offers,
 });
 
 export { Main };

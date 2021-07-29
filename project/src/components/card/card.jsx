@@ -20,7 +20,7 @@ function Card(props) {
         <Link to={`${AppRoute.PROPERTY}`+`${id}`} onClick={() => {onOfferSelect(offer);}}>
           <img
             className='place-card__image'
-            src={`img/${previewImage}`}
+            src={`${previewImage}`}
             width='260'
             height='200'
             alt='Place image'
