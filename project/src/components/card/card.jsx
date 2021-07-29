@@ -13,9 +13,10 @@ function Card(props) {
   const [hover, setHover] = React.useState(false);
   return (
     <article className='cities__place-card place-card'
-      onMouseEnter={() => setHover(props.offer)}
+      onMouseEnter={() => setHover(offer)}
       onMouseLeave={() => setHover(false)}
     >
+      {console.log (hover)}
       <div className='cities__image-wrapper place-card__image-wrapper'>
         <Link to={`${AppRoute.PROPERTY}`+`${id}`} onClick={() => {onOfferSelect(offer);}}>
           <img

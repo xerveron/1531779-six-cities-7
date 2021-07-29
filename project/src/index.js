@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import offers from './mocks/offers';
 import comments from './mocks/comment';
-import {createStore, applyMiddleware} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import { reducer } from './store/reducer';
 import thunk from 'redux-thunk';
-import {createAPI} from './services/api';
+import { createAPI } from './services/api';
 import { ActionCreator } from './store/action';
 import { AuthorizationStatus } from './const';
-import {checkAuth, fetchOffersList} from './store/api-actions';
+import { checkAuth, fetchOffersList } from './store/api-actions';
+import { redirect } from './middlewares/redirect';
 
 
 const api = createAPI(
@@ -22,6 +23,7 @@ const store = createStore(
   reducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
+    applyMiddleware(redirect),
   ),
 );
 

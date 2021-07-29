@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { AuthorizationStatus } from '../../const';
+import { logout } from '../../store/api-actions';
 
-function Header() {
+function Header({ authorizationStatus, logout }) {
+
   return (
     <header className='header'>
       <div className='container'>
@@ -22,23 +27,35 @@ function Header() {
             </Link>
           </div>
           <nav className='header__nav'>
+
+
             <ul className='header__nav-list'>
               <li className='header__nav-item user'>
-                <a
+                <Link
                   className='header__nav-link header__nav-link--profile'
-                  href='#'
+                  to={AppRoute.LOGIN}
                 >
                   <div className='header__avatar-wrapper user__avatar-wrapper'></div>
-                  <span className='header__user-name user__name'>
-                    Oliver.conner@gmail.com
-                  </span>
-                </a>
+                  {authorizationStatus === AuthorizationStatus.AUTH ?
+                    <span className='header__user-name user__name'>
+                      Oliver.conner@gmail.com
+                    </span> : <span className="header__login">Sign in</span>}
+                </Link>
               </li>
-              <li className='header__nav-item'>
-                <a className='header__nav-link' href='#'>
-                  <span className='header__signout'>Sign out</span>
-                </a>
-              </li>
+              {authorizationStatus === AuthorizationStatus.AUTH ?
+                <li className='header__nav-item'>
+                  <Link
+                    className='header__nav-link'
+                    onClick={(evt) => {
+                      evt.preventDefault();
+
+                      logout();
+                    }}
+                    to='/'
+                  >
+                    <span className='header__signout'>Sign out</span>
+                  </Link>
+                </li> : ''}
             </ul>
           </nav>
         </div>
@@ -47,4 +64,20 @@ function Header() {
   );
 }
 
-export default Header;
+Header.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  logout() {
+    dispatch(logout());
+  },
+});
+
+export { Header };
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
