@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 function Review({review}) {
   const { comment, user, rating,date } = review;
-  const stars = (rating*20) + '%';
+  const stars = `${rating*20}%`;
   console.log ();
   return (
     <li className='reviews__item'>

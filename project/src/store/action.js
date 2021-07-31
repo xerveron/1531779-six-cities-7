@@ -8,7 +8,7 @@ export const ActionType = {
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'user/redirect',
   NEIGHBOUR_OFFER_FILL: 'offers/neighbour',
-  CHANGE_SORT: 'offers/sort'
+  CHANGE_SORT: 'offers/sort',
 };
 
 export const ActionCreator = {
@@ -23,6 +23,9 @@ export const ActionCreator = {
   offersFill: (offers) => ({
     type: ActionType.OFFERS_FILL,
     payload: offers,
+  }),
+  offerChange: () => ({
+    type: ActionType.OFFER_CHANGE,
   }),
   commentsFill: (comments) => ({
     type: ActionType.COMMENTS_FILL,
@@ -47,4 +50,5 @@ export const ActionCreator = {
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
   }),
+
 };

@@ -40,9 +40,7 @@ function App(props) {
         >
         </PrivateRoute>
         <Route exact path='/offer/:id?'>
-          <Property
-            offers={offers}
-          />
+          {({ match }) => <Property id={match.params.id} offers={offers} />}
         </Route>
         <Route>
           <NotFoundScreen />

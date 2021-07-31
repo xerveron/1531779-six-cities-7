@@ -20,6 +20,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         city: action.payload,
       };
+    case ActionType.OFFER_CHANGE:
+      return {
+        ...state,
+        isNeighbourOffersLoaded: false,
+        isCommentsLoaded: false,
+      };
     case ActionType.OFFERS_FILL:
       return {
         ...state,

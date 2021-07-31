@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 function SendReview() {
   const [comment, setComment] = React.useState('');
-  function handleInputChange (event) {
-    setComment(event.target.value);
+  const [star, setStar] = React.useState('');
+
+  const reviewRef = useRef(null);
+  const starRef = useRef(null);
+  function handleStarChange(event) {
+    setStar(starRef.current);
+  }
+  function handleInputChange(event) {
+    setComment(reviewRef.current.value);
   }
   return (
 
-    <form className='reviews__form form' action='#' method='post'>
-      {console.log(comment)}
+    <form ref={starRef} className='reviews__form form' action='#' method='post' onClick={handleStarChange}>
+      {console.log(star)}
       <label
         className='reviews__label form__label'
         htmlFor='review'
@@ -17,11 +24,13 @@ function SendReview() {
       </label>
       <div className='reviews__rating-form form__rating'>
         <input
+
           className='form__rating-input visually-hidden'
           name='rating'
           value='5'
           id='5-stars'
           type='radio'
+
         />
         <label
           htmlFor='5-stars'
@@ -34,6 +43,7 @@ function SendReview() {
         </label>
 
         <input
+
           className='form__rating-input visually-hidden'
           name='rating'
           value='4'
@@ -101,7 +111,9 @@ function SendReview() {
           </svg>
         </label>
       </div>
-      <textarea onChange={handleInputChange}
+      <textarea
+        onChange={handleInputChange}
+        ref={reviewRef}
         className='reviews__textarea form__textarea'
         id='review'
         name='review'

@@ -10,8 +10,8 @@ import OfferList from '../offerList/offerList';
 import LoadingScreen from '../loadingScreen/loadingScreen';
 
 function Property(props) {
-  const { offers, comments, neighbourOffers, downloadComments, downloadNeighbourOffersList,isCommentsLoaded,isNeighbourOffersLoaded } = props;
-  const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium, host, id } = offers[parseInt(window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length), 10) - 1];
+  const { offers, comments, neighbourOffers, downloadComments, downloadNeighbourOffersList,isCommentsLoaded,isNeighbourOffersLoaded,id } = props;
+  const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium, host } = offers[parseInt(window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length), 10) - 1];
   if (!isCommentsLoaded) {
     downloadComments(id);
     return <LoadingScreen></LoadingScreen>;}

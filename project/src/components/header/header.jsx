@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
 import { logout } from '../../store/api-actions';
+import { ActionCreator } from '../../store/action';
 
-function Header({ authorizationStatus, logout }) {
+function Header({ authorizationStatus, logoutNow, offerChange }) {
 
   return (
     <header className='header'>
@@ -14,6 +15,7 @@ function Header({ authorizationStatus, logout }) {
         <div className='header__wrapper'>
           <div className='header__left'>
             <Link
+              onClick={offerChange()}
               className='header__logo1-link header__logo-link--active'
               to={AppRoute.ROOT}
             >
@@ -51,7 +53,7 @@ function Header({ authorizationStatus, logout }) {
                     onClick={(evt) => {
                       evt.preventDefault();
 
-                      logout();
+                      logoutNow();
                     }}
                     to='/'
                   >
@@ -68,6 +70,8 @@ function Header({ authorizationStatus, logout }) {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  offerChange:PropTypes.func.isRequired,
+  logoutNow:PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -75,9 +79,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logout() {
-    dispatch(logout());
+  logoutNow() {
+    dispatch(logout);
   },
+  offerChange() {
+    dispatch(ActionCreator.offerChange());
+  },
+
 });
 
 export { Header };
