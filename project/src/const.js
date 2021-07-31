@@ -66,7 +66,9 @@ export const APIRoute = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   OFFERS: '/hotels',
+  NEARBY: '/nearby',
   COMMENTS: '/comments/',
+  FAVORITE: '/favorite/',
 };
 
 export const SortTypes = [

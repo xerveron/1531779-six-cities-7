@@ -1,5 +1,6 @@
 import { ActionType } from './action';
 import { Cities, AuthorizationStatus, SortTypes } from '../const';
+import { pushArrayElement } from '../utils';
 
 const initialState = {
   city: Cities.find((city) => city.name === 'Paris'),
@@ -11,7 +12,9 @@ const initialState = {
   isCommentsLoaded: false,
   isNeighbourOffersLoaded: false,
   currentSort: SortTypes[0],
+  favoriteOffer: {},
 };
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,6 +22,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         city: action.payload,
+      };
+    case ActionType.HOVER_OFFER:
+      return {
+        ...state,
+        hoverOffer: action.payload,
+      };
+    case ActionType.FAVORITE_OFFER:
+      console.log (state.offers);
+      return {
+        ...state,
+        offers: pushArrayElement(state.offers,action.payload.id,action.payload),
       };
     case ActionType.OFFER_CHANGE:
       return {

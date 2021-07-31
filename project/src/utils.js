@@ -36,3 +36,9 @@ export const adaptComment = (comment) => {
   delete adaptedComment.user.avatar_url;
   return adaptedComment;
 };
+
+
+export const pushArrayElement = (array,index,element) => {
+  const newArray = array.slice();
+  newArray[index-1]=element;
+  return newArray;};

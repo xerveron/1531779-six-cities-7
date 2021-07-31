@@ -9,12 +9,22 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: 'user/redirect',
   NEIGHBOUR_OFFER_FILL: 'offers/neighbour',
   CHANGE_SORT: 'offers/sort',
+  HOVER_OFFER: 'offers/hover',
+  FAVORITE_OFFER: 'offer/favorite',
 };
 
 export const ActionCreator = {
   cityChange: (city) => ({
     type: ActionType.CITY_CHANGE,
     payload: city,
+  }),
+  hoverOffer: (offer) => ({
+    type: ActionType.HOVER_OFFER,
+    payload: offer,
+  }),
+  favoriteOffer: (offer) => ({
+    type: ActionType.FAVORITE_OFFER,
+    payload: offer,
   }),
   changeSort: (currentSort) => ({
     type: ActionType.CHANGE_SORT,

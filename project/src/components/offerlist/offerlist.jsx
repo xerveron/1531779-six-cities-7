@@ -29,7 +29,7 @@ function OfferList(props) {
   }
   return (
     <div className='cities__places-list places__list tabs__content'>
-      {items.map((offer) => <Card offer={offer} key={offer.id}/>)}
+      {items.map((offer) => <Card id={offer.id} key={offer.id}/>)}
     </div>
   );
 }

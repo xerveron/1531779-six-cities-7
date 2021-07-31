@@ -8,7 +8,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 );
 
 export const fetchNeighbourOffersList = (id) => (dispatch, _getState, api) => (
-  api.get(`${APIRoute.OFFERS}/${id}/nearby`)
+  api.get(`${APIRoute.OFFERS}/${id}${APIRoute.NEARBY}`)
     .then(({data}) => dispatch(ActionCreator.neighbourOffersFill(data.map(adaptOffer))))
 );
 
@@ -33,6 +33,12 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(({data}) => localStorage.setItem('token', data.token))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
+);
+
+export const favoriteOfferSend = (id,status) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}${id}/${status}`)
+    .then(({data}) => dispatch(ActionCreator.favoriteOffer(adaptOffer(data))))
+    .catch(() => {})
 );
 
 export const logout = () => (dispatch, _getState, api) => (

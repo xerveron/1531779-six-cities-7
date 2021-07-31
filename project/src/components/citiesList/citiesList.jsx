@@ -12,7 +12,7 @@ function CitiesList(props) {
         <ul className='locations__list tabs__list'>
           {Cities.map((city) => (
             <li className='locations__item' key={city.name} onClick={() => {onCityClick(city);}}>
-              <a className='locations__item-link tabs__item' href='#'>
+              <a className='locations__item-link tabs__item'>
                 <span>{city.name}</span>
               </a>
             </li>))}

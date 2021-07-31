@@ -7,7 +7,7 @@ import useMap from '../../hooks/useMap';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const.js';
 import { connect } from 'react-redux';
 
-function Map({ offers, city }) {
+function Map({ offers, city, hoverOffer }) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -39,12 +39,26 @@ function Map({ offers, city }) {
             },
             {
               icon: defaultCustomIcon,
-            }
+            },
           )
           .addTo(map);
+          /* parseInt(window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length), 10) - 1 */
+        if (hoverOffer && !window.location.pathname.includes('offer')) {
+          leaflet
+            .marker(
+              {
+                lat: hoverOffer.location.latitude,
+                lng: hoverOffer.location.longitude,
+              },
+              {
+                icon: currentCustomIcon,
+              },
+            )
+            .addTo(map);
+        }
       });
     }
-  }, [map, offers, city]);
+  }, [map, offers, city, hoverOffer]);
 
   return <div style={{ height: '100%' }} ref={mapRef}></div>;
 }
@@ -61,6 +75,7 @@ Map.propTypes = {
 
 const mapStateToProps = (state) => ({
   city: state.city,
+  hoverOffer: state.hoverOffer,
 });
 
 export { Map };

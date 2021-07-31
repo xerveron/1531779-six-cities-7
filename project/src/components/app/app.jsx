@@ -13,10 +13,10 @@ import offerProp from '../card/offer.prop';
 import { isCheckedAuth } from '../../utils';
 import PrivateRoute from '../privateRoute/privateRoute';
 import browserHistory from '../browserHistory';
+import { Redirect } from 'react-router';
 
 function App(props) {
-  const { offers, authorizationStatus, isOffersLoaded } = props;
-
+  const { authorizationStatus, isOffersLoaded } = props;
   if (isCheckedAuth(authorizationStatus) || !isOffersLoaded) {
     return (
       <LoadingScreen />
@@ -26,12 +26,10 @@ function App(props) {
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main
-            offers={offers}
-          />
+          <Main />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
-          <Login />
+          {authorizationStatus ?  <Redirect to={AppRoute.ROOT} /> : <Login />}
         </Route>
         <PrivateRoute
           exact
@@ -39,8 +37,8 @@ function App(props) {
           render={() => <Favorites />}
         >
         </PrivateRoute>
-        <Route exact path='/offer/:id?'>
-          {({ match }) => <Property id={match.params.id} offers={offers} />}
+        <Route path='/offer/:id'>
+          {({ match }) => <Property id={match.params.id} />}
         </Route>
         <Route>
           <NotFoundScreen />
@@ -51,7 +49,6 @@ function App(props) {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   isOffersLoaded: PropTypes.bool.isRequired,
 };

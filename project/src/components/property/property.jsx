@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../card/offer.prop';
 import ReviewList from '../reviewList/reviewList';
@@ -8,16 +8,23 @@ import { fetchOfferComments, fetchNeighbourOffersList } from '../../store/api-ac
 import Map from '../map/map';
 import OfferList from '../offerList/offerList';
 import LoadingScreen from '../loadingScreen/loadingScreen';
+import NotFoundScreen from '../notFoundScreen/notFoundScreen';
+import { ActionCreator } from '../../store/action';
+import { favoriteOfferSend } from '../../store/api-actions';
 
 function Property(props) {
-  const { offers, comments, neighbourOffers, downloadComments, downloadNeighbourOffersList, isCommentsLoaded, isNeighbourOffersLoaded, id } = props;
-  const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium, host } = offers[parseInt(window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length), 10) - 1];
+  const { offers, comments, neighbourOffers, downloadComments, downloadNeighbourOffersList, isCommentsLoaded, isNeighbourOffersLoaded, id, favoriteOffer } = props;
+  if (id < 1 || id > offers.length) {
+    return <NotFoundScreen />;
+  }
+  const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium, isFavorite, host } = offers[id - 1];
+  const favoriteButton = useRef(null);
   if (!isCommentsLoaded) {
     downloadComments(id);
   }
   if (!isNeighbourOffersLoaded) {
     downloadNeighbourOffersList(id);
-  };
+  }
   return (
     <div className='page'>
       <Header />
@@ -45,6 +52,9 @@ function Property(props) {
                 <button
                   className='property__bookmark-button button'
                   type='button'
+                  onClick={()=>{
+                    favoriteOfferSend (offers[id - 1]);
+                  }}
                 >
                   <svg
                     className='property__bookmark-icon'
@@ -112,7 +122,7 @@ function Property(props) {
                   </p>
                 </div>
               </div>
-              {isCommentsLoaded? <ReviewList comments={comments} /> : <LoadingScreen/>}
+              {isCommentsLoaded ? <ReviewList comments={comments} /> : <LoadingScreen />}
             </div>
           </div>
           <section className='property__map map'>
@@ -154,6 +164,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   downloadNeighbourOffersList(id) {
     dispatch(fetchNeighbourOffersList(id));
+  },
+  favoriteOffer(offer) {
+    dispatch(ActionCreator.favoriteOffer(offer));
   },
 });
 

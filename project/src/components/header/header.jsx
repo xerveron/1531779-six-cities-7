@@ -7,7 +7,7 @@ import { AuthorizationStatus } from '../../const';
 import { logout } from '../../store/api-actions';
 import { ActionCreator } from '../../store/action';
 
-function Header({ authorizationStatus, logoutNow, offerChange }) {
+function Header({authorizationStatus, logoutNow, offerChange}) {
 
   return (
     <header className='header'>
@@ -52,7 +52,6 @@ function Header({ authorizationStatus, logoutNow, offerChange }) {
                     className='header__nav-link'
                     onClick={(evt) => {
                       evt.preventDefault();
-
                       logoutNow();
                     }}
                     to='/'
@@ -79,13 +78,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logoutNow() {
-    dispatch(logout);
-  },
   offerChange() {
     dispatch(ActionCreator.offerChange());
   },
-
+  logoutNow() {
+    dispatch(logout);
+  },
 });
 
 export { Header };
