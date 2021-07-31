@@ -68,3 +68,10 @@ export const APIRoute = {
   OFFERS: '/hotels',
   COMMENTS: '/comments/',
 };
+
+export const SortTypes = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+]

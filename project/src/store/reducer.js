@@ -1,5 +1,5 @@
 import { ActionType } from './action';
-import { Cities, AuthorizationStatus } from '../const';
+import { Cities, AuthorizationStatus, SortTypes } from '../const';
 
 const initialState = {
   city: Cities.find((city) => city.name === 'Paris'),
@@ -10,6 +10,7 @@ const initialState = {
   isOffersLoaded: false,
   isCommentsLoaded: false,
   isNeighbourOffersLoaded: false,
+  currentSort: SortTypes[0],
 };
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +42,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.CHANGE_SORT:
+      return {
+        ...state,
+        currentSort: action.payload,
       };
     case ActionType.LOGOUT:
       return {

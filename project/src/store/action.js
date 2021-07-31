@@ -8,12 +8,17 @@ export const ActionType = {
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'user/redirect',
   NEIGHBOUR_OFFER_FILL: 'offers/neighbour',
+  CHANGE_SORT: 'offers/sort'
 };
 
 export const ActionCreator = {
   cityChange: (city) => ({
     type: ActionType.CITY_CHANGE,
     payload: city,
+  }),
+  changeSort: (currentSort) => ({
+    type: ActionType.CHANGE_SORT,
+    payload: currentSort,
   }),
   offersFill: (offers) => ({
     type: ActionType.OFFERS_FILL,
