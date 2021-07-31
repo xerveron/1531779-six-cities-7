@@ -7,6 +7,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'user/redirect',
+  SAVE_AUTH_DATA: 'user/savedata',
   NEIGHBOUR_OFFER_FILL: 'offers/neighbour',
   CHANGE_SORT: 'offers/sort',
   HOVER_OFFER: 'offers/hover',
@@ -40,6 +41,10 @@ export const ActionCreator = {
   commentsFill: (comments) => ({
     type: ActionType.COMMENTS_FILL,
     payload: comments,
+  }),
+  saveAuthData: (data) => ({
+    type: ActionType.SAVE_AUTH_DATA,
+    payload:data,
   }),
   neighbourOffersFill: (neighbourOffers) => ({
     type: ActionType.NEIGHBOUR_OFFER_FILL,

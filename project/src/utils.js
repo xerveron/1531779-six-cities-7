@@ -37,6 +37,20 @@ export const adaptComment = (comment) => {
   return adaptedComment;
 };
 
+export const adaptAuthData = (data) => {
+  const adaptedData = Object.assign(
+    {},
+    data,
+    {
+      avatarUrl:data.avatar_url,
+      isPro: data.is_pro,
+    },
+  );
+  delete adaptedData.avatar_url;
+  delete adaptedData.is_pro;
+  return adaptedData;
+};
+
 
 export const pushArrayElement = (array,index,element) => {
   const newArray = array.slice();

@@ -11,20 +11,25 @@ import LoadingScreen from '../loadingScreen/loadingScreen';
 import NotFoundScreen from '../notFoundScreen/notFoundScreen';
 import { ActionCreator } from '../../store/action';
 import { favoriteOfferSend } from '../../store/api-actions';
+import { useHistory } from 'react-router';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 function Property(props) {
-  const { offers, comments, neighbourOffers, downloadComments, downloadNeighbourOffersList, isCommentsLoaded, isNeighbourOffersLoaded, id, favoriteOffer } = props;
-  if (id < 1 || id > offers.length) {
+  const { offers, comments, neighbourOffers, downloadComments, downloadNeighbourOffersList, isCommentsLoaded, isNeighbourOffersLoaded, id, favoriteOffer,authorizationStatus } = props;
+  const history = useHistory();
+  if (id < 1 || id > offers.length || !Number.isInteger(+id)) {
     return <NotFoundScreen />;
   }
   const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium, isFavorite, host } = offers[id - 1];
-  const favoriteButton = useRef(null);
+
+
   if (!isCommentsLoaded) {
     downloadComments(id);
   }
   if (!isNeighbourOffersLoaded) {
     downloadNeighbourOffersList(id);
   }
+
   return (
     <div className='page'>
       <Header />
@@ -50,11 +55,9 @@ function Property(props) {
                   {title}
                 </h1>
                 <button
-                  className='property__bookmark-button button'
+                  className={`property__bookmark-button${isFavorite ? '--active' : ''} button`}
                   type='button'
-                  onClick={()=>{
-                    favoriteOfferSend (offers[id - 1]);
-                  }}
+                  onClick={authorizationStatus !== AuthorizationStatus.AUTH ? () => { history.push(AppRoute.LOGIN) } : () => { favoriteOffer(id, isFavorite ? 0 : 1); }}
                 >
                   <svg
                     className='property__bookmark-icon'
@@ -156,6 +159,7 @@ const mapStateToProps = (state) => ({
   neighbourOffers: state.neighbourOffers,
   isCommentsLoaded: state.isCommentsLoaded,
   isNeighbourOffersLoaded: state.isNeighbourOffersLoaded,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -165,8 +169,8 @@ const mapDispatchToProps = (dispatch) => ({
   downloadNeighbourOffersList(id) {
     dispatch(fetchNeighbourOffersList(id));
   },
-  favoriteOffer(offer) {
-    dispatch(ActionCreator.favoriteOffer(offer));
+  favoriteOffer(id, isFavorite) {
+    dispatch(favoriteOfferSend(id, isFavorite));
   },
 });
 

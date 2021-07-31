@@ -7,20 +7,27 @@ import { connect } from 'react-redux';
 import { ActionCreator } from '../../store/action';
 import { favoriteOfferSend } from '../../store/api-actions';
 import { APIRoute } from '../../const';
+import { AuthorizationStatus } from '../../const';
+import { useHistory } from 'react-router';
 
 
 function Card(props) {
-  const { offers, id,offerChange,hoverOffer,favoriteOffer } = props;
-  const { previewImage, price, title, type, rating,isFavorite } = offers[id-1];
-  const stars = `${rating*20}%`;
+  const { offer, offerChange, hoverOffer, favoriteOffer, authorizationStatus } = props;
+  const { previewImage, price, title, type, rating, isFavorite, id, isPremium } = offer;
+  const stars = `${rating * 20}%`;
+  const history = useHistory();
   return (
     <article className='cities__place-card place-card'
-      onMouseEnter={() => hoverOffer(offers[id-1])}
+      onMouseEnter={() => hoverOffer(offer)}
       onMouseLeave={() => hoverOffer()}
     >
+      {isPremium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div> : ''}
       <div className='cities__image-wrapper place-card__image-wrapper'>
         <Link
-          onClick={() => { hoverOffer();offerChange(); }}
+          onClick={() => { hoverOffer(); offerChange(); }}
           to={`${AppRoute.PROPERTY}${id}`}
         >
           <img
@@ -39,9 +46,7 @@ function Card(props) {
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
           <button
-            onClick={()=>{
-              {console.log (id, isFavorite)}
-              favoriteOffer(id, isFavorite ? 0 : 1);}}
+            onClick={authorizationStatus !== AuthorizationStatus.AUTH ? () => { history.push(AppRoute.LOGIN) } : () => { favoriteOffer(id, isFavorite ? 0 : 1); }}
             className={`place-card__bookmark-button place-card__bookmark-button${isFavorite ? '--active' : ''} button`}
             type='button'
           >
@@ -61,7 +66,7 @@ function Card(props) {
         </div>
         <h2 className='place-card__name'>
           <Link
-            onClick={() => { hoverOffer();offerChange(); }}
+            onClick={() => { hoverOffer(); offerChange(); }}
             to={`${AppRoute.PROPERTY}${id}`}
           >{title}
           </Link>
@@ -74,23 +79,23 @@ function Card(props) {
 
 
 Card.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
+  offer: offerProp,
 };
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   offerChange() {
     dispatch(ActionCreator.offerChange());
   },
-  hoverOffer(offer)  {
+  hoverOffer(offer) {
     dispatch(ActionCreator.hoverOffer(offer));
   },
   favoriteOffer(id, isFavorite) {
     dispatch(favoriteOfferSend(id, isFavorite));
   },
-});
-
-const mapStateToProps = (state) => ({
-  offers: state.offers,
 });
 
 export { Card };

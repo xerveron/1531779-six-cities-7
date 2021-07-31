@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { Switch, Route, Router as BrowserRouter } from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
@@ -29,7 +29,7 @@ function App(props) {
           <Main />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
-          {authorizationStatus ?  <Redirect to={AppRoute.ROOT} /> : <Login />}
+          {authorizationStatus===AuthorizationStatus.AUTH ?  <Redirect to={AppRoute.ROOT} /> : <Login />}
         </Route>
         <PrivateRoute
           exact

@@ -13,6 +13,7 @@ const initialState = {
   isNeighbourOffersLoaded: false,
   currentSort: SortTypes[0],
   favoriteOffer: {},
+  authData: {},
 };
 
 
@@ -29,10 +30,21 @@ const reducer = (state = initialState, action) => {
         hoverOffer: action.payload,
       };
     case ActionType.FAVORITE_OFFER:
-      console.log (state.offers);
+      console.log(state.offers);
       return {
         ...state,
-        offers: pushArrayElement(state.offers,action.payload.id,action.payload),
+        offers: pushArrayElement(state.offers, action.payload.id, action.payload),
+      };
+    case ActionType.SAVE_AUTH_DATA:
+      localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('email', action.payload.email);
+      localStorage.setItem('isPro', action.payload.isPro);
+      localStorage.setItem('id', action.payload.id);
+      localStorage.setItem('name', action.payload.name);
+      localStorage.setItem('avatarUrl', action.payload.avatarUrl);
+      return {
+        ...state,
+        authData: action.payload,
       };
     case ActionType.OFFER_CHANGE:
       return {

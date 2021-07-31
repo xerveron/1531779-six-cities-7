@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { logout } from '../../store/api-actions';
 import { ActionCreator } from '../../store/action';
 
 function Header({authorizationStatus, logoutNow, offerChange}) {
-
+  const userAvatar = useRef(null);
   return (
     <header className='header'>
       <div className='container'>
@@ -42,7 +42,7 @@ function Header({authorizationStatus, logoutNow, offerChange}) {
                   <div className='header__avatar-wrapper user__avatar-wrapper'></div>
                   {authorizationStatus === AuthorizationStatus.AUTH ?
                     <span className='header__user-name user__name'>
-                      Oliver.conner@gmail.com
+                      {localStorage.getItem('email')}
                     </span> : <span className="header__login">Sign in</span>}
                 </Link>
               </li>
@@ -75,6 +75,7 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
+  authData: state.authData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,7 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.offerChange());
   },
   logoutNow() {
-    dispatch(logout);
+    dispatch(logout());
   },
 });
 

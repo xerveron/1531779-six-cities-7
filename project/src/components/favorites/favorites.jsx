@@ -5,15 +5,17 @@ import FavoriteList from '../favoriteList/favoriteList';
 import { Cities } from '../../const';
 import Header from '../header/header';
 import { connect } from 'react-redux';
+import NotFoundScreen from '../notFoundScreen/notFoundScreen';
 
 const offerFilter = (offers, city) =>
   offers.filter((offer) => offer.city.name === city.name);
 
 function Favorites(props) {
   const { offers } = props;
-  console.log(offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-  console.log (favoriteOffers);
+  if (favoriteOffers.length===0) {
+    return <NotFoundScreen/>;
+  }
   const favoriteCities = Cities.filter((city) =>
     favoriteOffers
       .map((offer) => offer.city.name === city.name)
