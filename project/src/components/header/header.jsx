@@ -33,7 +33,9 @@ function Header({ authorizationStatus, logout }) {
               <li className='header__nav-item user'>
                 <Link
                   className='header__nav-link header__nav-link--profile'
-                  to={AppRoute.LOGIN}
+                  to={authorizationStatus === AuthorizationStatus.AUTH ?
+                    AppRoute.FAVORITES
+                    : AppRoute.LOGIN}
                 >
                   <div className='header__avatar-wrapper user__avatar-wrapper'></div>
                   {authorizationStatus === AuthorizationStatus.AUTH ?

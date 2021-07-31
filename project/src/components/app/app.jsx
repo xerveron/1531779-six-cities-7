@@ -15,9 +15,9 @@ import PrivateRoute from '../privateRoute/privateRoute';
 import browserHistory from '../browserHistory';
 
 function App(props) {
-  const { offers, authorizationStatus, isDataLoaded } = props;
+  const { offers, authorizationStatus, isOffersLoaded } = props;
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isOffersLoaded) {
     return (
       <LoadingScreen />
     );
@@ -39,7 +39,7 @@ function App(props) {
           render={() => <Favorites />}
         >
         </PrivateRoute>
-        <Route path={AppRoute.PROPERTY}>
+        <Route exact path='/offer/:id?'>
           <Property
             offers={offers}
           />
@@ -55,12 +55,12 @@ function App(props) {
 App.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
+  isOffersLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
-  isDataLoaded: state.isDataLoaded,
+  isOffersLoaded: state.isOffersLoaded,
 });
 
 

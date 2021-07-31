@@ -9,7 +9,7 @@ import Header from '../header/header';
 
 function Main(props) {
   const { city,offers } = props;
-  const cityOffer = offers.filter((offer) => offer.city.name === city.name);
+  const cityOffers = offers.filter((offer) => offer.city.name === city.name);
   return (
     <div className='page page--gray page--main'>
       <Header />
@@ -21,7 +21,7 @@ function Main(props) {
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
               <b className='places__found'>
-                {cityOffer.length} places to stay in {city.name}
+                {cityOffers.length} places to stay in {city.name}
               </b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
@@ -49,11 +49,11 @@ function Main(props) {
                   </li>
                 </ul>
               </form>
-              <OfferList cityOffer={cityOffer} />
+              <OfferList offers={cityOffers} />
             </section>
             <div className='cities__right-section'>
               <section className='cities__map map'>
-                <Map cityOffer={cityOffer} />
+                <Map offers={cityOffers} />
               </section>
             </div>
           </div>

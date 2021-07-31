@@ -3,8 +3,13 @@ import { Cities, AuthorizationStatus } from '../const';
 
 const initialState = {
   city: Cities.find((city) => city.name === 'Paris'),
-  offers: [],
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  offers: [],
+  comments: [],
+  neighbourOffers: [],
+  isOffersLoaded: false,
+  isCommentsLoaded: false,
+  isNeighbourOffersLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,10 +23,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
-        isDataLoaded: true,
+        isOffersLoaded: true,
       };
-    default:
-      return state;
+    case ActionType.NEIGHBOUR_OFFER_FILL:
+      return {
+        ...state,
+        neighbourOffers: action.payload,
+        isNeighbourOffersLoaded: true,
+      };
+    case ActionType.COMMENTS_FILL:
+      return {
+        ...state,
+        comments: action.payload,
+        isCommentsLoaded: true,
+      };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
@@ -32,6 +47,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         authorizationStatus: AuthorizationStatus.NO_AUTH,
       };
+    default:
+      return state;
   }
 };
 

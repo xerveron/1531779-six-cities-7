@@ -7,7 +7,7 @@ import useMap from '../../hooks/useMap';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const.js';
 import { connect } from 'react-redux';
 
-function Map({ cityOffer, city }) {
+function Map({ offers, city }) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -30,7 +30,7 @@ function Map({ cityOffer, city }) {
           layer.remove();
         }
       });
-      cityOffer.forEach((offer) => {
+      offers.forEach((offer) => {
         leaflet
           .marker(
             {
@@ -44,13 +44,13 @@ function Map({ cityOffer, city }) {
           .addTo(map);
       });
     }
-  }, [map, cityOffer, city]);
+  }, [map, offers, city]);
 
   return <div style={{ height: '100%' }} ref={mapRef}></div>;
 }
 
 Map.propTypes = {
-  cityOffer: PropTypes.arrayOf(offerProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
     lat: PropTypes.number.isRequired,

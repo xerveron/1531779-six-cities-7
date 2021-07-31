@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import offerProp from '../card/offer.prop';
 
 function OfferList(props) {
-  const { cityOffer } = props;
-  const items = cityOffer
+  const { offers } = props;
+  const items = offers
     .map((offer) => <Card offer={offer} key={offer.id} />);
   return (
     <div className='cities__places-list places__list tabs__content'>
@@ -15,7 +15,7 @@ function OfferList(props) {
 }
 
 OfferList.propTypes = {
-  cityOffer: PropTypes.arrayOf(offerProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
 

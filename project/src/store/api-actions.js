@@ -7,9 +7,19 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.offersFill(data.map(adaptOffer))))
 );
 
-export const fetchOfferComment = () => (dispatch, _getState, api) => (
-  api.get(APIRoute.COMMENT)
-    .then(({data}) => dispatch(ActionCreator.offersFill(data.map(adaptComment))))
+export const fetchNeighbourOffersList = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${id}/nearby`)
+    .then(({data}) => dispatch(ActionCreator.neighbourOffersFill(data.map(adaptOffer))))
+);
+
+export const fetchOfferComments = (id) => (dispatch, _getState, api) => (
+  api.get(APIRoute.COMMENTS+id)
+    .then(({data}) => dispatch(ActionCreator.commentsFill(data.map(adaptComment))))
+);
+
+export const uploadOfferComment = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.COMMENT_SEND)
+    .then(({data}) => dispatch(ActionCreator.comm(data.map(adaptComment))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

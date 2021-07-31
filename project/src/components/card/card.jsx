@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import offerProp from '../card/offer.prop';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActionCreator } from '../../store/action';
 
 
 function Card(props) {
-  const { offer, onOfferSelect } = props;
-  const { id, previewImage, price, title } = offer;
+  const { offer } = props;
+  const { id, previewImage, price, title, type } = offer;
   const [hover, setHover] = React.useState(false);
   return (
     <article className='cities__place-card place-card'
-      onMouseEnter={() => setHover(offer)}
-      onMouseLeave={() => setHover(false)}
+    /* onMouseEnter={() => setHover(offer)}
+    onMouseLeave={() => setHover(false)} */
     >
-      {console.log (hover)}
+      {/* {console.log (hover)} */}
       <div className='cities__image-wrapper place-card__image-wrapper'>
-        <Link to={`${AppRoute.PROPERTY}`+`${id}`} onClick={() => {onOfferSelect(offer);}}>
+        <Link to={`${AppRoute.PROPERTY}${id}`}>
           <img
             className='place-card__image'
             src={`${previewImage}`}
@@ -51,26 +50,19 @@ function Card(props) {
           </div>
         </div>
         <h2 className='place-card__name'>
-          <a href='#'>{title}</a>
+          <Link to={`${AppRoute.PROPERTY}${id}`}>{title}</Link>
         </h2>
-        <p className='place-card__type'>Private room</p>
+        <p className='place-card__type'>{type}</p>
       </div>
     </article>
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onOfferSelect(offer) {
-    dispatch(ActionCreator.offerChange(offer));
-  },
-});
 
 Card.propTypes = {
   offer: offerProp,
-  onOfferSelect: PropTypes.func.isRequired,
 };
 
 
-export {Card};
-export default connect(null, mapDispatchToProps) (Card);
+export default Card;
 

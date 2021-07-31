@@ -2,9 +2,12 @@ export const ActionType = {
   CITY_CHANGE: 'city/change',
   OFFERS_FILL: 'offers/fill',
   OFFER_CHANGE: 'offers/change',
+  COMMENTS_FILL: 'comment/download',
+  COMMENT_SEND: 'comment/upload',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'user/redirect',
+  NEIGHBOUR_OFFER_FILL: 'offers/neighbour',
 };
 
 export const ActionCreator = {
@@ -16,9 +19,17 @@ export const ActionCreator = {
     type: ActionType.OFFERS_FILL,
     payload: offers,
   }),
-  offerChange: (offer) => ({
-    type: ActionType.OFFER_CHANGE,
-    payload: offer,
+  commentsFill: (comments) => ({
+    type: ActionType.COMMENTS_FILL,
+    payload: comments,
+  }),
+  neighbourOffersFill: (neighbourOffers) => ({
+    type: ActionType.NEIGHBOUR_OFFER_FILL,
+    payload: neighbourOffers,
+  }),
+  commentSend: (comment) => ({
+    type: ActionType.COMMENT_SEND,
+    payload: comment,
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
