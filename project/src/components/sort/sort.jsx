@@ -6,6 +6,7 @@ import { SortTypes } from '../../const';
 
 function Sort(props) {
   console.log(props);
+
   const { currentSort, onSortClick } = props;
 
   return (
