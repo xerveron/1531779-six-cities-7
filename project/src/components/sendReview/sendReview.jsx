@@ -7,9 +7,9 @@ function SendReview() {
   const reviewRef = useRef(null);
   const starRef = useRef(null);
   function handleStarChange(event) {
-    setStar(starRef.current);
+    setStar(event.target.value);
   }
-  function handleInputChange(event) {
+  function handleInputChange() {
     setComment(reviewRef.current.value);
   }
   return (
@@ -24,7 +24,7 @@ function SendReview() {
       </label>
       <div className='reviews__rating-form form__rating'>
         <input
-
+          onClick={handleStarChange}
           className='form__rating-input visually-hidden'
           name='rating'
           value='5'
@@ -43,7 +43,7 @@ function SendReview() {
         </label>
 
         <input
-
+          onClick={handleStarChange}
           className='form__rating-input visually-hidden'
           name='rating'
           value='4'
@@ -61,6 +61,7 @@ function SendReview() {
         </label>
 
         <input
+          onClick={handleStarChange}
           className='form__rating-input visually-hidden'
           name='rating'
           value='3'
@@ -78,6 +79,7 @@ function SendReview() {
         </label>
 
         <input
+          onClick={handleStarChange}
           className='form__rating-input visually-hidden'
           name='rating'
           value='2'
@@ -95,6 +97,7 @@ function SendReview() {
         </label>
 
         <input
+          onClick={handleStarChange}
           className='form__rating-input visually-hidden'
           name='rating'
           value='1'

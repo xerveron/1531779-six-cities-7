@@ -4,13 +4,16 @@ import offerProp from '../card/offer.prop';
 import FavoriteList from '../favoriteList/favoriteList';
 import { Cities } from '../../const';
 import Header from '../header/header';
+import { connect } from 'react-redux';
 
 const offerFilter = (offers, city) =>
   offers.filter((offer) => offer.city.name === city.name);
 
 function Favorites(props) {
   const { offers } = props;
+  console.log(offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  console.log (favoriteOffers);
   const favoriteCities = Cities.filter((city) =>
     favoriteOffers
       .map((offer) => offer.city.name === city.name)
@@ -43,4 +46,9 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export  {Favorites}
+export default connect (mapStateToProps,null) (Favorites);

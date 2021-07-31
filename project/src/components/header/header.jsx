@@ -15,7 +15,7 @@ function Header({ authorizationStatus, logoutNow, offerChange }) {
         <div className='header__wrapper'>
           <div className='header__left'>
             <Link
-              onClick={offerChange()}
+              onClick={() => {offerChange();}}
               className='header__logo1-link header__logo-link--active'
               to={AppRoute.ROOT}
             >

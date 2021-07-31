@@ -5,6 +5,7 @@ import offerProp from '../card/offer.prop';
 import { SortTypes } from '../../const';
 import { connect } from 'react-redux';
 import { sortOfferRating, sortOfferPriceHighToLow, sortOfferPriceLowToHigh } from '../../sortUtils';
+import { ActionCreator } from '../../store/action';
 
 function OfferList(props) {
   const { offers, currentSort } = props;
@@ -28,7 +29,7 @@ function OfferList(props) {
   }
   return (
     <div className='cities__places-list places__list tabs__content'>
-      {items.map((offer) => <Card offer={offer} key={offer.id} />)}
+      {items.map((offer) => <Card offer={offer} key={offer.id}/>)}
     </div>
   );
 }
@@ -42,5 +43,12 @@ const mapStateToProps = (state) => ({
   currentSort: state.currentSort,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  offerChange() {
+    dispatch(ActionCreator.offerChange());
+  },
+
+});
+
 export { OfferList };
-export default connect(mapStateToProps, null)(OfferList);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferList);
