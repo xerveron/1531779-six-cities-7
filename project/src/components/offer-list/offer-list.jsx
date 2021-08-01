@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
 import { SortTypes } from '../../const';
 import { connect } from 'react-redux';
-import { sortOfferRating, sortOfferPriceHighToLow, sortOfferPriceLowToHigh } from '../../sortUtils';
+import { sortOfferRating, sortOfferPriceHighToLow, sortOfferPriceLowToHigh } from '../../sort-utils';
 import { ActionCreator } from '../../store/action';
 
 function OfferList(props) {

@@ -1,4 +1,4 @@
-import browserHistory from '../components/browserHistory';
+import browserHistory from '../components/browser-history';
 import { ActionType } from '../store/action';
 
 export const redirect = (_store) => (next) => (action) => {

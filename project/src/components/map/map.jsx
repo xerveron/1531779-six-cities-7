@@ -2,10 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
 import cityProp from '../../props/city.prop';
-import hoverOfferProp from '../../props/hoverOffer.prop';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const.js';
 import { connect } from 'react-redux';
 
@@ -68,7 +67,7 @@ function Map({ offers, city, hoverOffer }) {
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   city: cityProp,
-  hoverOffer: hoverOfferProp,
+  hoverOffer: offerProp,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,4 +1,4 @@
-import './popUp.css';
+import './pop-up.css';
 
 const LIVE_TIME = 5000;
 

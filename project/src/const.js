@@ -9,7 +9,7 @@ export const AppRoute = {
   ROOT: '/',
 };
 
-export const ApartType = [
+export const ApartTypes = [
   'hostel',
   'apartment',
   'hotel',

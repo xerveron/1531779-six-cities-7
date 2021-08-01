@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
-import FavoriteList from '../favoriteList/favoriteList';
+import FavoriteList from '../favorite-list/favorite-list';
 import { Cities } from '../../const';
 import Header from '../header/header';
 import { connect } from 'react-redux';
@@ -35,7 +35,7 @@ function Favorites(props) {
               <ul className='favorites__list'>
                 {favoriteCities.map((city, i) => (
                   <FavoriteList
-                    place={city.name}
+                    place={city}
                     offers={offerFilter(favoriteOffers, city)}
                     key={city.name}
                   />
@@ -49,7 +49,7 @@ function Favorites(props) {
 }
 
 Favorites.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
 };
 
 const mapStateToProps = (state) => ({

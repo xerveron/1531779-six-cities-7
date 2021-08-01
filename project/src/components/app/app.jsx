@@ -7,11 +7,11 @@ import Main from '../main/main';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import Property from '../property/property';
-import NotFoundScreen from '../notFoundScreen/notFoundScreen';
-import LoadingScreen from '../loadingScreen/loadingScreen';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import { isCheckedAuth } from '../../utils';
-import PrivateRoute from '../privateRoute/privateRoute';
-import browserHistory from '../browserHistory';
+import PrivateRoute from '../private-route/private-route';
+import browserHistory from '../browser-history';
 import { Redirect } from 'react-router';
 
 function App(props) {

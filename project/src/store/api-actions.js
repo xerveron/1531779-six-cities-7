@@ -1,7 +1,7 @@
 import { ActionCreator } from './action';
 import { AuthorizationStatus, AppRoute, APIRoute } from '../const';
 import { adaptOffer, adaptComment, adaptAuthData } from '../utils';
-import { popUp } from '../popUp/popUp';
+import { popUp } from '../pop-up/pop-up';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)

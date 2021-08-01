@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import OfferList from '../offerList/offerList';
+import OfferList from '../offer-list/offer-list';
 import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
 import Map from '../map/map';
-import CitiesList from '../citiesList/citiesList';
+import CitiesList from '../cities-list/cities-list';
 import { connect } from 'react-redux';
 import Header from '../header/header';
 import Sort from '../sort/sort';

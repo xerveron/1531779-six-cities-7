@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { ApartType } from '../const';
+import { ApartTypes } from '../const';
 
 export default PropTypes.shape({
   bedrooms: PropTypes.number.isRequired,
@@ -33,5 +33,5 @@ export default PropTypes.shape({
   price:PropTypes.number.isRequired,
   rating:PropTypes.number.isRequired,
   title:PropTypes.string.isRequired,
-  type:PropTypes.oneOf(ApartType).isRequired,
-}).isRequired;
+  type:PropTypes.oneOf(ApartTypes).isRequired,
+});

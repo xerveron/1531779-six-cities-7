@@ -6,6 +6,7 @@ import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ActionCreator } from '../../store/action';
+import cityProp from '../../props/city.prop';
 
 function FavoriteList(props) {
   const { place, offers, onCityClick } = props;
@@ -14,8 +15,8 @@ function FavoriteList(props) {
     <li className='favorites__locations-items'>
       <div className='favorites__locations locations locations--current'>
         <div className='locations__item'>
-          <Link onClick={onCityClick} className='locations__item-link' to={AppRoute.ROOT}>
-            <span>{place}</span>
+          <Link onClick={() => onCityClick(place)} className='locations__item-link' to={AppRoute.ROOT}>
+            <span>{place.name}</span>
           </Link>
         </div>
       </div>
@@ -33,8 +34,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 FavoriteList.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
-  place: PropTypes.string.isRequired,
+  offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
+  place: cityProp,
   onCityClick: PropTypes.func.isRequired,
 };
 

@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../../props/offer.prop';
 import commentProp from '../../props/comment.prop';
-import ReviewList from '../reviewList/reviewList';
+import ReviewList from '../review-list/review-list';
 import Header from '../header/header';
 import { connect } from 'react-redux';
 import { fetchOfferComments, fetchNeighbourOffersList } from '../../store/api-actions';
 import Map from '../map/map';
-import OfferList from '../offerList/offerList';
-import LoadingScreen from '../loadingScreen/loadingScreen';
-import NotFoundScreen from '../notFoundScreen/notFoundScreen';
+import OfferList from '../offer-list/offer-list';
+import LoadingScreen from '../loading-screen/loading-screen';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { favoriteOfferSend } from '../../store/api-actions';
 import { useHistory } from 'react-router';
 import { AppRoute, AuthorizationStatus } from '../../const';
@@ -144,8 +144,8 @@ function Property(props) {
 
 Property.propTypes = {
   comments: PropTypes.arrayOf(commentProp).isRequired,
-  neighbourOffers: PropTypes.arrayOf(offerProp).isRequired,
-  offers: PropTypes.arrayOf(offerProp).isRequired,
+  neighbourOffers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
+  offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
   favoriteOffer:PropTypes.func.isRequired,
   authorizationStatus:PropTypes.string.isRequired,
   isCommentsLoaded:PropTypes.bool.isRequired,

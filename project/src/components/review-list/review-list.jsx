@@ -2,11 +2,11 @@ import React from 'react';
 import Review from '../review/review';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SendReview from '../sendReview/sendReview';
+import SendReview from '../send-review/send-review';
 import commentProp from '../../props/comment.prop';
 import { fetchOfferComments } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../const';
-import { sortCommentDate } from '../../sortUtils';
+import { sortCommentDate } from '../../sort-utils';
 
 function ReviewList(props) {
   const { comments, authorizationStatus, id } = props;
