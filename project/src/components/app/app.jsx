@@ -28,7 +28,7 @@ function App(props) {
           <Main />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
-          {authorizationStatus===AuthorizationStatus.AUTH ?  <Redirect to={AppRoute.ROOT} /> : <Login />}
+          {authorizationStatus === AuthorizationStatus.AUTH ? <Redirect to={AppRoute.ROOT} /> : <Login />}
         </Route>
         <PrivateRoute
           exact

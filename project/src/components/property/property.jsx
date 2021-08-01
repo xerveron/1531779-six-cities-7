@@ -143,14 +143,14 @@ function Property(props) {
 }
 
 Property.propTypes = {
-  comments: commentProp,
+  comments: PropTypes.arrayOf(commentProp).isRequired,
   neighbourOffers: PropTypes.arrayOf(offerProp).isRequired,
   offers: PropTypes.arrayOf(offerProp).isRequired,
   favoriteOffer:PropTypes.func.isRequired,
   authorizationStatus:PropTypes.string.isRequired,
   isCommentsLoaded:PropTypes.bool.isRequired,
   isNeighbourOffersLoaded:PropTypes.bool.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   downloadNeighbourOffersList: PropTypes.func.isRequired,
   downloadComments: PropTypes.func.isRequired,
 };

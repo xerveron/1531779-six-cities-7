@@ -18,9 +18,8 @@ function SendReview({ onSubmit, id }) {
   }, [starRef,star]);
   const handleSubmitClick = (event) => {
     event.preventDefault();
-    Array.from(event.target.elements).forEach((element) => element.disabled = 'disabled');
-    onSubmit(comment, star, id);
-    event.target.reset();
+    Array.from(event.target.elements).forEach((element) => element.disabled = true);
+    onSubmit(comment, star, id, event);
   };
   const handleStarChange = (event) => {
     setStar(event.target.value);
@@ -159,14 +158,14 @@ function SendReview({ onSubmit, id }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(comment, star, id) {
-    dispatch(reviewSend(comment, star, id));
+  onSubmit(comment, star, id, event) {
+    dispatch(reviewSend(comment, star, id, event));
   },
 });
 
 SendReview.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  id:PropTypes.number.isRequired,
+  id:PropTypes.string.isRequired,
 };
 
 export { SendReview };

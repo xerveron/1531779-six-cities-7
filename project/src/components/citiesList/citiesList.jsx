@@ -13,7 +13,7 @@ function CitiesList(props) {
         <ul className='locations__list tabs__list'>
           {Cities.map((city) => (
             <li className='locations__item' key={city.name} onClick={() => { onCityClick(city); }}>
-              <a onClick={(event) => {event.preventDefault();}} href='/' className={`locations__item-link tabs__item${city.name===currentCity.name ? '--active' : ''}`}>
+              <a onClick={(event) => { event.preventDefault(); }} href='/' className={`locations__item-link tabs__item${city.name === currentCity.name ? '--active' : ''}`}>
                 <span>{city.name}</span>
               </a>
             </li>))}
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => ({
 });
 
 CitiesList.propTypes = {
-  currentCity:cityProp,
+  currentCity: cityProp,
   onCityClick: PropTypes.func.isRequired,
 };
 

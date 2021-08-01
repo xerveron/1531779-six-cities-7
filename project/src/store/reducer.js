@@ -14,6 +14,7 @@ const initialState = {
   currentSort: SortTypes[0],
   favoriteOffer: {},
   authData: {},
+  commentSendStatus: false,
 };
 
 
@@ -68,6 +69,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         comments: action.payload,
         isCommentsLoaded: true,
+      };
+    case ActionType.COMMENTS_SEND:
+      return {
+        ...state,
+        comments: action.payload,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {

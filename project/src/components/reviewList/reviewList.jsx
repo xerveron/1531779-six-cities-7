@@ -40,9 +40,9 @@ const mapStateToProps = (state) => ({
 });
 
 ReviewList.propTypes = {
-  comments: commentProp,
+  comments: PropTypes.arrayOf(commentProp).isRequired,
   authorizationStatus:PropTypes.string.isRequired,
-  id:PropTypes.number.isRequired,
+  id:PropTypes.string.isRequired,
 };
 
 export { ReviewList };
