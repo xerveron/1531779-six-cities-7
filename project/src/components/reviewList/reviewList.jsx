@@ -1,13 +1,15 @@
 import React from 'react';
 import Review from '../review/review';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoadingScreen from '../loadingScreen/loadingScreen';
-import { isCheckedAuth } from '../../utils';
 import SendReview from '../sendReview/sendReview';
+import commentProp from '../../props/comment.prop';
 import { fetchOfferComments } from '../../store/api-actions';
+import { AuthorizationStatus } from '../../const';
+import { sortCommentDate } from '../../sortUtils';
 
 function ReviewList(props) {
-  const {comments} = props;
+  const { comments, authorizationStatus, id } = props;
 
   return (
     <section className='property__reviews reviews'>
@@ -15,9 +17,11 @@ function ReviewList(props) {
         Reviews &middot; <span className='reviews__amount'>{comments.length}</span>
       </h2>
       <ul className='reviews__list'>
-        {comments.map((comment) => <Review review={comment} key={comment.id} />)}
+        {comments
+          .sort(sortCommentDate)
+          .map((comment) => <Review review={comment} key={comment.id} />)}
       </ul>
-      <SendReview />
+      {authorizationStatus === AuthorizationStatus.AUTH ? <SendReview id={id} /> : ''}
     </section>
 
   );
@@ -32,7 +36,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   comments: state.comments,
+  authorizationStatus: state.authorizationStatus,
 });
+
+ReviewList.propTypes = {
+  comments: commentProp,
+  authorizationStatus:PropTypes.string.isRequired,
+  id:PropTypes.number.isRequired,
+};
 
 export { ReviewList };
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);

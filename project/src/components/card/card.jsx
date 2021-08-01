@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import offerProp from '../card/offer.prop';
+import offerProp from '../../props/offer.prop';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ActionCreator } from '../../store/action';
 import { favoriteOfferSend } from '../../store/api-actions';
-import { APIRoute } from '../../const';
 import { AuthorizationStatus } from '../../const';
 import { useHistory } from 'react-router';
 
@@ -16,6 +15,13 @@ function Card(props) {
   const { previewImage, price, title, type, rating, isFavorite, id, isPremium } = offer;
   const stars = `${rating * 20}%`;
   const history = useHistory();
+  const handleFavoriteClick = () => {
+    if (authorizationStatus !== AuthorizationStatus.AUTH) {
+      history.push(AppRoute.LOGIN);
+    } else {
+      favoriteOffer(id, isFavorite ? 0 : 1);
+    }
+  };
   return (
     <article className='cities__place-card place-card'
       onMouseEnter={() => hoverOffer(offer)}
@@ -46,7 +52,7 @@ function Card(props) {
             <span className='place-card__price-text'>&#47;&nbsp;night</span>
           </div>
           <button
-            onClick={authorizationStatus !== AuthorizationStatus.AUTH ? () => { history.push(AppRoute.LOGIN) } : () => { favoriteOffer(id, isFavorite ? 0 : 1); }}
+            onClick={handleFavoriteClick}
             className={`place-card__bookmark-button place-card__bookmark-button${isFavorite ? '--active' : ''} button`}
             type='button'
           >
@@ -80,6 +86,10 @@ function Card(props) {
 
 Card.propTypes = {
   offer: offerProp,
+  offerChange : PropTypes.func.isRequired,
+  hoverOffer:PropTypes.func.isRequired,
+  favoriteOffer:PropTypes.func.isRequired,
+  authorizationStatus:PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

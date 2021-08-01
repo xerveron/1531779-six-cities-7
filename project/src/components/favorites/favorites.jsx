@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import offerProp from '../card/offer.prop';
+import offerProp from '../../props/offer.prop';
 import FavoriteList from '../favoriteList/favoriteList';
 import { Cities } from '../../const';
 import Header from '../header/header';
 import { connect } from 'react-redux';
-import NotFoundScreen from '../notFoundScreen/notFoundScreen';
 
 const offerFilter = (offers, city) =>
   offers.filter((offer) => offer.city.name === city.name);
@@ -13,14 +12,14 @@ const offerFilter = (offers, city) =>
 function Favorites(props) {
   const { offers } = props;
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-  if (favoriteOffers.length===0) {
-    return <NotFoundScreen/>;
+  let favoriteCities=[];
+  if (favoriteOffers.length>0) {
+    favoriteCities = Cities.filter((city) =>
+      favoriteOffers
+        .map((offer) => offer.city.name === city.name)
+        .reduce((a, b) => a || b),
+    );
   }
-  const favoriteCities = Cities.filter((city) =>
-    favoriteOffers
-      .map((offer) => offer.city.name === city.name)
-      .reduce((a, b) => a || b),
-  );
   return (
     <div className='page'>
       <Header />
@@ -28,15 +27,20 @@ function Favorites(props) {
         <div className='page__favorites-container container'>
           <section className='favorites'>
             <h1 className='favorites__title'>Saved listing</h1>
-            <ul className='favorites__list'>
-              {favoriteCities.map((city, i) => (
-                <FavoriteList
-                  place={city.name}
-                  offers={offerFilter(favoriteOffers, city)}
-                  key={city.name}
-                />
-              ))}
-            </ul>
+            {favoriteOffers.length === 0 ?
+              <div className='favorites__status-wrapper'>
+                <b className='favorites__status'>Nothing yet saved.</b>
+                <p className='favorites__status-description'>Save properties to narrow down search or plan your future trips.</p>
+              </div> :
+              <ul className='favorites__list'>
+                {favoriteCities.map((city, i) => (
+                  <FavoriteList
+                    place={city.name}
+                    offers={offerFilter(favoriteOffers, city)}
+                    key={city.name}
+                  />
+                ))}
+              </ul>}
           </section>
         </div>
       </main>
@@ -52,5 +56,5 @@ const mapStateToProps = (state) => ({
   offers: state.offers,
 });
 
-export  {Favorites}
-export default connect (mapStateToProps,null) (Favorites);
+export { Favorites };
+export default connect(mapStateToProps, null)(Favorites);

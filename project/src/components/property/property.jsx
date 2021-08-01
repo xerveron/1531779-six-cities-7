@@ -1,6 +1,7 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import offerProp from '../card/offer.prop';
+import offerProp from '../../props/offer.prop';
+import commentProp from '../../props/comment.prop';
 import ReviewList from '../reviewList/reviewList';
 import Header from '../header/header';
 import { connect } from 'react-redux';
@@ -9,7 +10,6 @@ import Map from '../map/map';
 import OfferList from '../offerList/offerList';
 import LoadingScreen from '../loadingScreen/loadingScreen';
 import NotFoundScreen from '../notFoundScreen/notFoundScreen';
-import { ActionCreator } from '../../store/action';
 import { favoriteOfferSend } from '../../store/api-actions';
 import { useHistory } from 'react-router';
 import { AppRoute, AuthorizationStatus } from '../../const';
@@ -21,7 +21,7 @@ function Property(props) {
     return <NotFoundScreen />;
   }
   const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium, isFavorite, host } = offers[id - 1];
-
+  const stars = `${rating * 20}%`;
 
   if (!isCommentsLoaded) {
     downloadComments(id);
@@ -57,7 +57,7 @@ function Property(props) {
                 <button
                   className={`property__bookmark-button${isFavorite ? '--active' : ''} button`}
                   type='button'
-                  onClick={authorizationStatus !== AuthorizationStatus.AUTH ? () => { history.push(AppRoute.LOGIN) } : () => { favoriteOffer(id, isFavorite ? 0 : 1); }}
+                  onClick={authorizationStatus !== AuthorizationStatus.AUTH ? () => { history.push(AppRoute.LOGIN);} : () => { favoriteOffer(id, isFavorite ? 0 : 1); }}
                 >
                   <svg
                     className='property__bookmark-icon'
@@ -71,7 +71,7 @@ function Property(props) {
               </div>
               <div className='property__rating rating'>
                 <div className='property__stars rating__stars'>
-                  <span style={{ width: '80%' }}></span>
+                  <span style={{ width: stars }}></span>
                   <span className='visually-hidden'>Rating</span>
                 </div>
                 <span className='property__rating-value rating__value'>
@@ -118,14 +118,9 @@ function Property(props) {
                   <p className='property__text'>
                     {description}
                   </p>
-                  <p className='property__text'>
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
-                  </p>
                 </div>
               </div>
-              {isCommentsLoaded ? <ReviewList comments={comments} /> : <LoadingScreen />}
+              {isCommentsLoaded ? <ReviewList comments={comments} id={id} /> : <LoadingScreen />}
             </div>
           </div>
           <section className='property__map map'>
@@ -148,7 +143,14 @@ function Property(props) {
 }
 
 Property.propTypes = {
+  comments: commentProp,
+  neighbourOffers: PropTypes.arrayOf(offerProp).isRequired,
   offers: PropTypes.arrayOf(offerProp).isRequired,
+  favoriteOffer:PropTypes.func.isRequired,
+  authorizationStatus:PropTypes.string.isRequired,
+  isCommentsLoaded:PropTypes.bool.isRequired,
+  isNeighbourOffersLoaded:PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
   downloadNeighbourOffersList: PropTypes.func.isRequired,
   downloadComments: PropTypes.func.isRequired,
 };

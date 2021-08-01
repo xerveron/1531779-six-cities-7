@@ -13,13 +13,8 @@ export const fetchNeighbourOffersList = (id) => (dispatch, _getState, api) => (
 );
 
 export const fetchOfferComments = (id) => (dispatch, _getState, api) => (
-  api.get(APIRoute.COMMENTS+id)
+  api.get(`${APIRoute.COMMENTS}${id}`)
     .then(({data}) => dispatch(ActionCreator.commentsFill(data.map(adaptComment))))
-);
-
-export const uploadOfferComment = () => (dispatch, _getState, api) => (
-  api.get(APIRoute.COMMENT_SEND)
-    .then(({data}) => dispatch(ActionCreator.comm(data.map(adaptComment))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -38,6 +33,12 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 export const favoriteOfferSend = (id,status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}${id}/${status}`)
     .then(({data}) => dispatch(ActionCreator.favoriteOffer(adaptOffer(data))))
+    .catch(() => {})
+);
+
+export const reviewSend = (comment,rating,id) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.COMMENTS}${id}`, {comment,rating})
+    .then(({data}) => dispatch(ActionCreator.commentsFill(data.map(adaptComment))))
     .catch(() => {})
 );
 

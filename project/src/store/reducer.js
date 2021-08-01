@@ -30,7 +30,6 @@ const reducer = (state = initialState, action) => {
         hoverOffer: action.payload,
       };
     case ActionType.FAVORITE_OFFER:
-      console.log(state.offers);
       return {
         ...state,
         offers: pushArrayElement(state.offers, action.payload.id, action.payload),

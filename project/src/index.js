@@ -1,3 +1,5 @@
+/*eslint no-use-before-define: ["error", { "variables": false }]*/
+/*eslint-env es6*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';

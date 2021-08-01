@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../card/card';
 import PropTypes from 'prop-types';
-import offerProp from '../card/offer.prop';
+import offerProp from '../../props/offer.prop';
 import { SortTypes } from '../../const';
 import { connect } from 'react-redux';
 import { sortOfferRating, sortOfferPriceHighToLow, sortOfferPriceLowToHigh } from '../../sortUtils';

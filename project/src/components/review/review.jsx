@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import offerProp from '../card/offer.prop';
+import React from 'react';
+import commentProp from '../../props/comment.prop';
 import dayjs from 'dayjs';
 
 function Review({review}) {
   const { comment, user, rating,date } = review;
   const stars = `${rating*20}%`;
-  console.log ();
   return (
     <li className='reviews__item'>
       <div className='reviews__user user'>
@@ -38,5 +36,9 @@ function Review({review}) {
     </li>
   );
 }
+
+Review.propTypes = {
+  review: commentProp,
+};
 
 export default Review;

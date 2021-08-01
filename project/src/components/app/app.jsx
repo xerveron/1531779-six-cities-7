@@ -9,7 +9,6 @@ import Favorites from '../favorites/favorites';
 import Property from '../property/property';
 import NotFoundScreen from '../notFoundScreen/notFoundScreen';
 import LoadingScreen from '../loadingScreen/loadingScreen';
-import offerProp from '../card/offer.prop';
 import { isCheckedAuth } from '../../utils';
 import PrivateRoute from '../privateRoute/privateRoute';
 import browserHistory from '../browserHistory';

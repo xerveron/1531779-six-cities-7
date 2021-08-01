@@ -1,17 +1,28 @@
-import React, {useRef} from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {login} from '../../store/api-actions';
+import cityProp from '../../props/city.prop';
+import { connect } from 'react-redux';
+import { login } from '../../store/api-actions';
 import Header from '../header/header';
+import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
 
-function Login({onSubmit}) {
-  const loginRef = useRef();
-  const passwordRef = useRef();
-
+function Login({ onSubmit,city }) {
+  const loginRef = useRef(null);
+  const passwordRef = useRef(null);
+  const handlePassChange = () => {
+    if (passwordRef.current.value.replace(/\s/g, '').length === 0) {
+      passwordRef.current.setCustomValidity('Нельзя использовать только пробелы!');
+    } else {
+      passwordRef.current.setCustomValidity('');
+    }
+  };
+  useEffect(() => {
+    passwordRef.current.setCustomValidity('Нельзя использовать только пробелы!');
+  });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
     onSubmit({
       login: loginRef.current.value,
       password: passwordRef.current.value,
@@ -40,6 +51,7 @@ function Login({onSubmit}) {
                 <label className='visually-hidden'>Password</label>
                 <input
                   ref={passwordRef}
+                  onChange={handlePassChange}
                   className='login__input form__input'
                   type='password'
                   name='password'
@@ -57,9 +69,9 @@ function Login({onSubmit}) {
           </section>
           <section className='locations locations--login locations--current'>
             <div className='locations__item'>
-              <a className='locations__item-link' href='#'>
-                <span>Amsterdam</span>
-              </a>
+              <Link className='locations__item-link' to={AppRoute.ROOT}>
+                <span>{city.name}</span>
+              </Link>
             </div>
           </section>
         </div>
@@ -70,6 +82,7 @@ function Login({onSubmit}) {
 
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  city: cityProp,
 };
 
 
@@ -79,5 +92,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {Login};
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = (state) => ({
+  city: state.city,
+});
+
+export { Login };
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

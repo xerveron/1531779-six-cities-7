@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,6 @@ import { logout } from '../../store/api-actions';
 import { ActionCreator } from '../../store/action';
 
 function Header({authorizationStatus, logoutNow, offerChange}) {
-  const userAvatar = useRef(null);
   return (
     <header className='header'>
       <div className='container'>

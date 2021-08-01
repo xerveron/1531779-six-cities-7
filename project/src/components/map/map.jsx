@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import offerProp from '../card/offer.prop';
+import offerProp from '../../props/offer.prop';
+import cityProp from '../../props/city.prop';
+import hoverOfferProp from '../../props/hoverOffer.prop';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
@@ -42,7 +44,7 @@ function Map({ offers, city, hoverOffer }) {
             },
           )
           .addTo(map);
-          /* parseInt(window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length), 10) - 1 */
+        /* parseInt(window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length), 10) - 1 */
         if (hoverOffer && !window.location.pathname.includes('offer')) {
           leaflet
             .marker(
@@ -58,19 +60,15 @@ function Map({ offers, city, hoverOffer }) {
         }
       });
     }
-  }, [map, offers, city, hoverOffer]);
+  }, [map, offers, city, hoverOffer,currentCustomIcon,defaultCustomIcon]);
 
   return <div style={{ height: '100%' }} ref={mapRef}></div>;
 }
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }).isRequired,
+  city: cityProp,
+  hoverOffer: hoverOfferProp,
 };
 
 const mapStateToProps = (state) => ({

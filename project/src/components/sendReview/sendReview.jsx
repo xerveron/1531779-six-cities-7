@@ -1,21 +1,37 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { reviewSend } from '../../store/api-actions';
 
-function SendReview() {
-  const [comment, setComment] = React.useState('');
-  const [star, setStar] = React.useState('');
-
+function SendReview({ onSubmit, id }) {
+  const [comment, setComment] = useState('');
+  const [star, setStar] = useState('');
   const reviewRef = useRef(null);
   const starRef = useRef(null);
-  function handleStarChange(event) {
+  useEffect(() => {
+    if (star.length===0) {starRef.current.setCustomValidity('Нужно указать рейтинг!');}
+    else {
+      starRef.current.setCustomValidity('');
+    }
+    reviewRef.current.setAttribute('minlength', '50');
+    reviewRef.current.setAttribute('maxlength', '300');
+  }, [starRef,star]);
+  const handleSubmitClick = (event) => {
+    event.preventDefault();
+    Array.from(event.target.elements).forEach((element) => element.disabled = 'disabled');
+    onSubmit(comment, star, id);
+    event.target.reset();
+  };
+  const handleStarChange = (event) => {
     setStar(event.target.value);
-  }
-  function handleInputChange() {
+  };
+  const handleInputChange = () => {
     setComment(reviewRef.current.value);
-  }
+  };
+
   return (
 
-    <form ref={starRef} className='reviews__form form' action='#' method='post' onClick={handleStarChange}>
-      {console.log(star)}
+    <form className='reviews__form form' action='#' method='post' onSubmit={handleSubmitClick}>
       <label
         className='reviews__label form__label'
         htmlFor='review'
@@ -24,6 +40,7 @@ function SendReview() {
       </label>
       <div className='reviews__rating-form form__rating'>
         <input
+          ref={starRef}
           onClick={handleStarChange}
           className='form__rating-input visually-hidden'
           name='rating'
@@ -140,4 +157,17 @@ function SendReview() {
       </div>
     </form>);
 }
-export default SendReview;
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(comment, star, id) {
+    dispatch(reviewSend(comment, star, id));
+  },
+});
+
+SendReview.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  id:PropTypes.number.isRequired,
+};
+
+export { SendReview };
+export default connect(null, mapDispatchToProps)(SendReview);

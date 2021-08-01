@@ -12,7 +12,7 @@ function Sort(props) {
   };
   const handleDropDownClose = (reference) => {
     reference.current.classList.remove('places__options--opened');
-  }
+  };
 
   return (
     <form className='places__sorting' action='#' method='get'>
