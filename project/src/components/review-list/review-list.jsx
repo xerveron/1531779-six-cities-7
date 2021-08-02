@@ -19,6 +19,7 @@ function ReviewList(props) {
       <ul className='reviews__list'>
         {comments
           .sort(sortCommentDate)
+          .slice(0,10)
           .map((comment) => <Review review={comment} key={comment.id} />)}
       </ul>
       {authorizationStatus === AuthorizationStatus.AUTH ? <SendReview id={id} /> : ''}
