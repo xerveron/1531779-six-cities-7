@@ -24,7 +24,7 @@ function Sort(props) {
         </svg>
       </span>
       <ul ref={dropDownRef} className='places__options places__options--custom'>
-        {SortTypes.map((sortType) => <li className='places__option places__option--active' tabIndex='0' key={sortType} onClick={() => { onSortClick(sortType); handleDropDownClose(dropDownRef);}}>{sortType}</li>,
+        {SortTypes.map((sortType) => <li className='places__option' tabIndex='0' key={sortType} onMouseEnter={(event) => {event.target.classList.add('places__option--active');}} onMouseLeave={(event) => {event.target.classList.remove('places__option--active');}} onClick={() => { onSortClick(sortType); handleDropDownClose(dropDownRef);}}>{sortType}</li>,
         )}
       </ul>
     </form>
