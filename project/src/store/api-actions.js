@@ -41,11 +41,12 @@ export const favoriteOfferSend = (id, status) => (dispatch, _getState, api) => (
     .catch((err) => { popUp(`Ошибка доступа к серверу: ${err}`); })
 );
 
-export const reviewSend = (comment, rating, id, event) => (dispatch, _getState, api) => (
+export const reviewSend = (comment, rating, id, event, submitRef) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}${id}`, { comment, rating })
     .then(({ data }) => {
       event.target.reset();
       Array.from(event.target.elements).forEach((element) => element.disabled = false);
+      submitRef.disabled = true;
       dispatch(ActionCreator.commentsFill(data.map(adaptComment)));
     })
     .catch((err) => {

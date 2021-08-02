@@ -10,6 +10,7 @@ function SendReview({ onSubmit, id }) {
   const reviewRef = useRef(null);
   const starRef = useRef(null);
   useEffect(() => {
+    submitRef.current.disabled = true;
     reviewRef.current.setAttribute('minlength', '50');
     reviewRef.current.setAttribute('maxlength', '300');
   });
@@ -27,7 +28,9 @@ function SendReview({ onSubmit, id }) {
     Array.from(event.target.elements).forEach(
       (element) => (element.disabled = true),
     );
-    onSubmit(comment, star, id, event);
+    onSubmit(comment, star, id, event,submitRef.current);
+    setStar('');
+    setComment('');
   };
   const handleStarChange = (event) => {
     setStar(event.target.value);
@@ -167,8 +170,8 @@ function SendReview({ onSubmit, id }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(comment, star, id, event) {
-    dispatch(reviewSend(comment, star, id, event));
+  onSubmit(comment, star, id, event, submitRef) {
+    dispatch(reviewSend(comment, star, id, event, submitRef));
   },
 });
 
