@@ -70,11 +70,6 @@ const reducer = (state = initialState, action) => {
         comments: action.payload,
         isCommentsLoaded: true,
       };
-    case ActionType.COMMENTS_SEND:
-      return {
-        ...state,
-        comments: action.payload,
-      };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,

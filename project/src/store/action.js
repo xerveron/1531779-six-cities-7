@@ -3,7 +3,6 @@ export const ActionType = {
   OFFERS_FILL: 'offers/fill',
   OFFER_CHANGE: 'offers/change',
   COMMENTS_FILL: 'comment/download',
-  COMMENT_SEND: 'comment/upload',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'user/redirect',
@@ -49,10 +48,6 @@ export const ActionCreator = {
   neighbourOffersFill: (neighbourOffers) => ({
     type: ActionType.NEIGHBOUR_OFFER_FILL,
     payload: neighbourOffers,
-  }),
-  commentSend: (comment) => ({
-    type: ActionType.COMMENT_SEND,
-    payload: comment,
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
