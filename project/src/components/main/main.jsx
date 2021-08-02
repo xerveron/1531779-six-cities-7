@@ -9,7 +9,7 @@ import Header from '../header/header';
 import Sort from '../sort/sort';
 
 function Main(props) {
-  const { city, offers } = props;
+  const { city, offers,hoverOffer } = props;
   const refEmpty = useRef(null);
   useEffect(() => {
     if (refEmpty.current!==null) {
@@ -46,7 +46,7 @@ function Main(props) {
               </section>
               <div className='cities__right-section'>
                 <section className='cities__map map'>
-                  <Map offers={cityOffers} />
+                  <Map offers={cityOffers} hoverOffer={hoverOffer} />
                 </section>
               </div>
             </div>}
@@ -58,6 +58,7 @@ function Main(props) {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
+  hoverOffer: offerProp,
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
     lat: PropTypes.number.isRequired,
@@ -69,6 +70,7 @@ Main.propTypes = {
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
+  hoverOffer: state.hoverOffer,
 });
 
 export { Main };

@@ -43,8 +43,7 @@ function Map({ offers, city, hoverOffer }) {
             },
           )
           .addTo(map);
-        /* parseInt(window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1, window.location.pathname.length), 10) - 1 */
-        if (hoverOffer && !window.location.pathname.includes('offer')) {
+        if (hoverOffer) {
           leaflet
             .marker(
               {
@@ -72,7 +71,6 @@ Map.propTypes = {
 
 const mapStateToProps = (state) => ({
   city: state.city,
-  hoverOffer: state.hoverOffer,
 });
 
 export { Map };

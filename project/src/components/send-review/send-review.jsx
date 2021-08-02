@@ -6,19 +6,27 @@ import { reviewSend } from '../../store/api-actions';
 function SendReview({ onSubmit, id }) {
   const [comment, setComment] = useState('');
   const [star, setStar] = useState('');
+  const submitRef = useRef(null);
   const reviewRef = useRef(null);
   const starRef = useRef(null);
   useEffect(() => {
-    if (star.length===0) {starRef.current.setCustomValidity('Нужно указать рейтинг!');}
-    else {
-      starRef.current.setCustomValidity('');
-    }
     reviewRef.current.setAttribute('minlength', '50');
     reviewRef.current.setAttribute('maxlength', '300');
-  }, [starRef,star]);
+  });
+  useEffect(() => {
+    if (star.length === 0 || comment.length < 50 || comment.length > 300) {
+      submitRef.current.disabled = true;
+      reviewRef.current.reportValidity();
+    }
+    if (star.length > 0 && comment.length >= 50 && comment.length <= 300) {
+      submitRef.current.disabled = false;
+    }
+  }, [star, comment]);
   const handleSubmitClick = (event) => {
     event.preventDefault();
-    Array.from(event.target.elements).forEach((element) => element.disabled = true);
+    Array.from(event.target.elements).forEach(
+      (element) => (element.disabled = true),
+    );
     onSubmit(comment, star, id, event);
   };
   const handleStarChange = (event) => {
@@ -29,12 +37,13 @@ function SendReview({ onSubmit, id }) {
   };
 
   return (
-
-    <form className='reviews__form form' action='#' method='post' onSubmit={handleSubmitClick}>
-      <label
-        className='reviews__label form__label'
-        htmlFor='review'
-      >
+    <form
+      className='reviews__form form'
+      action='#'
+      method='post'
+      onSubmit={handleSubmitClick}
+    >
+      <label className='reviews__label form__label' htmlFor='review'>
         Your review
       </label>
       <div className='reviews__rating-form form__rating'>
@@ -46,7 +55,6 @@ function SendReview({ onSubmit, id }) {
           value='5'
           id='5-stars'
           type='radio'
-
         />
         <label
           htmlFor='5-stars'
@@ -142,19 +150,20 @@ function SendReview({ onSubmit, id }) {
       <div className='reviews__button-wrapper'>
         <p className='reviews__help'>
           To submit review please make sure to set{' '}
-          <span className='reviews__star'>rating</span> and describe
-          your stay with at least{' '}
-          <b className='reviews__text-amount'>50 characters</b>.
+          <span className='reviews__star'>rating</span> and describe your stay
+          with at least <b className='reviews__text-amount'>50 characters</b>.
         </p>
         <button
+          ref={submitRef}
           className='reviews__submit form__submit button'
           type='submit'
-          disabled=''
+          disabled='disabled'
         >
           Submit
         </button>
       </div>
-    </form>);
+    </form>
+  );
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -165,7 +174,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 SendReview.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  id:PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export { SendReview };

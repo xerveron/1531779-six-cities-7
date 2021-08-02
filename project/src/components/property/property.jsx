@@ -124,7 +124,7 @@ function Property(props) {
             </div>
           </div>
           <section className='property__map map'>
-            {neighbourOffers ? <Map offers={neighbourOffers} /> : <LoadingScreen />}
+            {neighbourOffers ? <Map offers={neighbourOffers} hoverOffer={offers[id - 1]} /> : <LoadingScreen />}
           </section>
         </section>
         <div className='container'>
