@@ -1,10 +1,11 @@
 import React from 'react';
 import commentProp from '../../props/comment.prop';
 import dayjs from 'dayjs';
+import { showStars } from '../../utils';
 
 function Review({review}) {
   const { comment, user, rating,date } = review;
-  const stars = `${rating*20}%`;
+  const stars = showStars(rating);
   return (
     <li className='reviews__item'>
       <div className='reviews__user user'>

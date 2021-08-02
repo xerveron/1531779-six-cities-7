@@ -56,3 +56,5 @@ export const pushArrayElement = (array,index,element) => {
   const newArray = array.slice();
   newArray[index-1]=element;
   return newArray;};
+
+export const showStars = (rating) => `${Math.round(rating) * 20}%`;

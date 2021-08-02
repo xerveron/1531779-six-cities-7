@@ -13,6 +13,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { favoriteOfferSend } from '../../store/api-actions';
 import { useHistory } from 'react-router';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { showStars } from '../../utils';
 
 function Property(props) {
   const { offers, comments, neighbourOffers, downloadComments, downloadNeighbourOffersList, isCommentsLoaded, isNeighbourOffersLoaded, id, favoriteOffer,authorizationStatus } = props;
@@ -21,7 +22,7 @@ function Property(props) {
     return <NotFoundScreen />;
   }
   const { description, title, price, goods, rating, type, bedrooms, maxAdults, images, isPremium, isFavorite, host } = offers[id - 1];
-  const stars = `${rating * 20}%`;
+  const stars = showStars(rating);
 
   if (!isCommentsLoaded) {
     downloadComments(id);

@@ -8,12 +8,13 @@ import { ActionCreator } from '../../store/action';
 import { favoriteOfferSend } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../const';
 import { useHistory } from 'react-router';
+import { showStars } from '../../utils';
 
 
 function Card(props) {
   const { offer, offerChange, hoverOffer, favoriteOffer, authorizationStatus } = props;
   const { previewImage, price, title, type, rating, isFavorite, id, isPremium } = offer;
-  const stars = `${rating * 20}%`;
+  const stars = showStars(rating);
   const history = useHistory();
   const handleFavoriteClick = () => {
     if (authorizationStatus !== AuthorizationStatus.AUTH) {
