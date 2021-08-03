@@ -29,7 +29,7 @@ export const adaptComment = (comment) => {
     {},
     comment,
     {
-      user: Object.assign({}, comment.user, { isPro: comment['user.is_pro'], avatarUrl:comment.user['avatar_url']}),
+      user: Object.assign({}, comment.user, { isPro: comment.user['is_pro'], avatarUrl:comment.user['avatar_url']}),
     },
   );
   delete adaptedComment.user['is_pro'];

@@ -139,7 +139,7 @@ function SendReview({ onSubmit, id }) {
         </label>
       </div>
       <textarea
-        onChange={handleInputChange}
+        onInput={handleInputChange}
         ref={reviewRef}
         className='reviews__textarea form__textarea'
         id='review'
