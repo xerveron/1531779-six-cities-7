@@ -33,7 +33,7 @@ function Favorites(props) {
                 <p className='favorites__status-description'>Save properties to narrow down search or plan your future trips.</p>
               </div> :
               <ul className='favorites__list'>
-                {favoriteCities.map((city, i) => (
+                {favoriteCities.map((city) => (
                   <FavoriteList
                     place={city}
                     offers={offerFilter(favoriteOffers, city)}

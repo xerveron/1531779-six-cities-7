@@ -10,7 +10,7 @@ import cityProp from '../../props/city.prop';
 
 function FavoriteList(props) {
   const { place, offers, onCityClick } = props;
-  const items = offers.map((offer, i) => <Card offer={offer} key={offer.id} />);
+  const items = offers.map((offer) => <Card offer={offer} key={offer.id} />);
   return (
     <li className='favorites__locations-items'>
       <div className='favorites__locations locations locations--current'>
