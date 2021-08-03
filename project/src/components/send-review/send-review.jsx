@@ -10,11 +10,8 @@ function SendReview({ onSubmit, id }) {
   const reviewRef = useRef(null);
   const starRef = useRef(null);
   useEffect(() => {
-    submitRef.current.disabled = true;
     reviewRef.current.setAttribute('minlength', '50');
     reviewRef.current.setAttribute('maxlength', '300');
-  });
-  useEffect(() => {
     if (star.length === 0 || comment.length < 50 || comment.length > 300) {
       submitRef.current.disabled = true;
       reviewRef.current.reportValidity();
