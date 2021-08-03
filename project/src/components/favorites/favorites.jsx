@@ -6,7 +6,7 @@ import { Cities } from '../../const';
 import Header from '../header/header';
 import { connect } from 'react-redux';
 
-const offerFilter = (offers, city) =>
+const getFilteredOffers = (offers, city) =>
   offers.filter((offer) => offer.city.name === city.name);
 
 function Favorites(props) {
@@ -36,7 +36,7 @@ function Favorites(props) {
                 {favoriteCities.map((city) => (
                   <FavoriteList
                     place={city}
-                    offers={offerFilter(favoriteOffers, city)}
+                    offers={getFilteredOffers(favoriteOffers, city)}
                     key={city.name}
                   />
                 ))}
